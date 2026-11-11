@@ -1,0 +1,1736 @@
+{
+  "_comentario": "Pacote de análise do grupo Crefisa. Tudo que é específico do cliente fica aqui; o código é genérico. manualTexto é carregado do arquivo crefisa-manual-2026.2.txt pelo seed.",
+  "chave": "crefisa-2026.2",
+  "nome": "Crefisa — Manual Interno de Análise 2026.2",
+  "versao": "2026.2",
+  "manualArquivo": "crefisa-manual-2026.2.txt",
+  "empresas": [
+    {
+      "id": "cfi",
+      "nome": "CREFISA S/A – CRÉDITO, FINANCIAMENTO E INVESTIMENTOS",
+      "cnpj": "60779196000196",
+      "apelidos": [
+        "crefisa s/a",
+        "crefisa s.a",
+        "crefisa sa",
+        "credito, financiamento e investimentos",
+        "credito financiamento e investimentos",
+        "crefisa cfi"
+      ]
+    },
+    {
+      "id": "banco",
+      "nome": "BANCO CREFISA S/A",
+      "cnpj": "61033106000186",
+      "apelidos": [
+        "banco crefisa"
+      ]
+    }
+  ],
+  "nomesGrupoCliente": [
+    "crefisa"
+  ],
+  "taxonomia": {
+    "teses": [
+      {
+        "id": "revisional.consignado",
+        "nome": "Revisional – empréstimo consignado",
+        "manual": "2.1"
+      },
+      {
+        "id": "revisional.pessoal",
+        "nome": "Revisional – empréstimo pessoal",
+        "manual": "2.2"
+      },
+      {
+        "id": "revisional.cartao",
+        "nome": "Revisional – juros de cartão de crédito",
+        "manual": "2.3"
+      },
+      {
+        "id": "superendividamento",
+        "nome": "Superendividamento",
+        "manual": "3"
+      },
+      {
+        "id": "negativacao.limpa_nome",
+        "nome": "Negativação – Serasa Limpa Nome",
+        "manual": "4.1"
+      },
+      {
+        "id": "negativacao.scr",
+        "nome": "Negativação – SCR",
+        "manual": "4.2"
+      },
+      {
+        "id": "negativacao.orgaos",
+        "nome": "Negativação – órgãos de proteção",
+        "manual": "4.3"
+      },
+      {
+        "id": "desconto.padrao",
+        "nome": "Desconto indevido padrão",
+        "manual": "5.1"
+      },
+      {
+        "id": "desconto.conta",
+        "nome": "Desconto indevido – em conta e não no benefício",
+        "manual": "5.2"
+      },
+      {
+        "id": "desconto.estorno",
+        "nome": "Desconto indevido – estorno",
+        "manual": "5.3"
+      },
+      {
+        "id": "fraude",
+        "nome": "Fraude (modalidade a definir pela trilha)",
+        "manual": "6"
+      },
+      {
+        "id": "fraude.refin",
+        "nome": "Fraude refin recorrente/automático",
+        "manual": "6.1"
+      },
+      {
+        "id": "fraude.filial",
+        "nome": "Fraude filial",
+        "manual": "6.2"
+      },
+      {
+        "id": "fraude.filial_rogo",
+        "nome": "Fraude filial a rogo",
+        "manual": "6.3"
+      },
+      {
+        "id": "fraude.whats",
+        "nome": "Fraude Whats",
+        "manual": "6.4"
+      },
+      {
+        "id": "fraude.web",
+        "nome": "Fraude Web Banco/Pessoal",
+        "manual": "6.5"
+      },
+      {
+        "id": "fraude.app",
+        "nome": "Fraude APP",
+        "manual": "6.6"
+      },
+      {
+        "id": "fraude.toscana_ate_2308",
+        "nome": "Fraude Toscana até 23/08/2023",
+        "manual": "6.7"
+      },
+      {
+        "id": "cancelamento_contrato",
+        "nome": "Cancelamento de contrato",
+        "manual": "7"
+      },
+      {
+        "id": "cancelamento_debito",
+        "nome": "Cancelamento do débito automático",
+        "manual": "8"
+      },
+      {
+        "id": "cheque_especial",
+        "nome": "Cheque especial",
+        "manual": "9"
+      },
+      {
+        "id": "mero_pagador",
+        "nome": "Banco mero pagador",
+        "manual": "10"
+      },
+      {
+        "id": "nao_cliente",
+        "nome": "Não é cliente",
+        "manual": "11"
+      },
+      {
+        "id": "exibicao.pessoal",
+        "nome": "Exibição – empréstimo pessoal",
+        "manual": "12.1"
+      },
+      {
+        "id": "exibicao.banco",
+        "nome": "Exibição – documentos de banco/consignado",
+        "manual": "12.2"
+      },
+      {
+        "id": "exibicao.generica",
+        "nome": "Exibição – pedido genérico",
+        "manual": "12.3"
+      }
+    ],
+    "preliminares": [
+      {
+        "id": "advogado_captador",
+        "nome": "Advogado captador",
+        "manual": "1.1"
+      },
+      {
+        "id": "conexao",
+        "nome": "Conexão",
+        "manual": "1.2"
+      },
+      {
+        "id": "abuso_direito_demandar",
+        "nome": "Abuso do direito de demandar",
+        "manual": "1.3"
+      },
+      {
+        "id": "revogacao_gratuidade",
+        "nome": "Revogação da gratuidade da justiça",
+        "manual": "1.4"
+      },
+      {
+        "id": "litispendencia",
+        "nome": "Litispendência",
+        "manual": "1.5"
+      },
+      {
+        "id": "coisa_julgada",
+        "nome": "Coisa julgada",
+        "manual": "1.6"
+      },
+      {
+        "id": "retificacao_polo_passivo",
+        "nome": "Retificação do polo passivo / ilegitimidade passiva",
+        "manual": "1.7"
+      },
+      {
+        "id": "ilegitimidade_ativa",
+        "nome": "Ilegitimidade ativa",
+        "manual": "1.8"
+      },
+      {
+        "id": "prescricao_quinquenal",
+        "nome": "Prescrição quinquenal",
+        "manual": "1.9.2"
+      },
+      {
+        "id": "prescricao_decenal",
+        "nome": "Prescrição decenal",
+        "manual": "1.9.3"
+      },
+      {
+        "id": "exclusao_caixa",
+        "nome": "Exclusão da Caixa do polo passivo",
+        "manual": "5.2"
+      }
+    ],
+    "prioridade": [
+      "nao_cliente",
+      "fraude",
+      "cancelamento_debito",
+      "desconto.estorno",
+      "desconto.conta",
+      "desconto.padrao",
+      "negativacao.scr",
+      "negativacao.limpa_nome",
+      "negativacao.orgaos",
+      "cheque_especial",
+      "mero_pagador",
+      "cancelamento_contrato",
+      "superendividamento",
+      "revisional",
+      "exibicao"
+    ],
+    "incompativeis": [
+      [
+        "fraude",
+        "revisional"
+      ],
+      [
+        "fraude",
+        "cancelamento_contrato"
+      ]
+    ],
+    "produtos": [
+      "pessoal",
+      "consignado",
+      "cartao",
+      "conta",
+      "inss",
+      "cheque_especial",
+      "outro"
+    ]
+  },
+  "regras": [
+    {
+      "id": "polo-pessoal",
+      "fase": "ambas",
+      "ordem": 10,
+      "fonte": "Manual 1.7",
+      "descricao": "Empréstimo pessoal: parte legítima é a Crefisa S/A CFI",
+      "quando": {
+        "==": [
+          {
+            "var": "produto"
+          },
+          "pessoal"
+        ]
+      },
+      "entao": [
+        {
+          "acao": "poloPassivo",
+          "empresaId": "cfi",
+          "empresa": "CREFISA S/A – CRÉDITO, FINANCIAMENTO E INVESTIMENTOS",
+          "cnpj": "60.779.196/0001-96"
+        }
+      ]
+    },
+    {
+      "id": "polo-banco",
+      "fase": "ambas",
+      "ordem": 11,
+      "fonte": "Manual 1.7",
+      "descricao": "Consignado, INSS, cartão, conta e serviços bancários: parte legítima é o Banco Crefisa S/A",
+      "quando": {
+        "in": [
+          {
+            "var": "produto"
+          },
+          [
+            "consignado",
+            "inss",
+            "cartao",
+            "conta",
+            "cheque_especial"
+          ]
+        ]
+      },
+      "entao": [
+        {
+          "acao": "poloPassivo",
+          "empresaId": "banco",
+          "empresa": "BANCO CREFISA S/A",
+          "cnpj": "61.033.106/0001-86"
+        }
+      ]
+    },
+    {
+      "id": "retificacao-polo",
+      "fase": "ambas",
+      "ordem": 12,
+      "fonte": "Manual 1.7",
+      "descricao": "Empresa indicada na inicial diverge da responsável pelo produto",
+      "quando": {
+        "and": [
+          {
+            "existe": {
+              "var": "decisao.poloPassivo"
+            }
+          },
+          {
+            "!": {
+              "in": [
+                {
+                  "var": "decisao.poloPassivo.empresaId"
+                },
+                {
+                  "var": "poloEmpresas"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "retificacao_polo_passivo",
+          "motivo": "A empresa indicada na inicial não é a responsável pelo produto discutido (Manual 1.7)."
+        }
+      ]
+    },
+    {
+      "id": "caixa-no-polo",
+      "fase": "triagem",
+      "ordem": 13,
+      "fonte": "Manual 5.2",
+      "descricao": "Caixa no polo passivo (comum na Justiça Federal)",
+      "quando": {
+        "==": [
+          {
+            "var": "ficha.processo.caixaNoPolo"
+          },
+          true
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "exclusao_caixa",
+          "motivo": "Caixa incluída no polo passivo: avaliar exclusão quando não for a responsável pela contratação (Manual 5.2)."
+        },
+        {
+          "acao": "alerta",
+          "nivel": "atencao",
+          "texto": "Caixa no polo passivo: confirmar se cabe preliminar de exclusão."
+        }
+      ]
+    },
+    {
+      "id": "menor-incapaz",
+      "fase": "triagem",
+      "ordem": 14,
+      "fonte": "Manual 1.8",
+      "descricao": "Autor menor ou incapaz representado",
+      "quando": {
+        "==": [
+          {
+            "var": "ficha.autor.menorOuIncapaz"
+          },
+          true
+        ]
+      },
+      "entao": [
+        {
+          "acao": "alerta",
+          "nivel": "atencao",
+          "texto": "Autor menor/incapaz representado: conferir no contrato se quem contratou foi o representante em nome próprio (ilegitimidade ativa, Manual 1.8)."
+        }
+      ]
+    },
+    {
+      "id": "ilegitimidade-ativa",
+      "fase": "parecer",
+      "ordem": 15,
+      "fonte": "Manual 1.8",
+      "descricao": "Contrato celebrado pelo representante em nome próprio",
+      "quando": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "ficha.autor.menorOuIncapaz"
+              },
+              true
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.contratadoPeloRepresentante"
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "ilegitimidade_ativa",
+          "motivo": "O contrato foi celebrado pelo representante legal em nome próprio (Manual 1.8)."
+        }
+      ]
+    },
+    {
+      "id": "captador",
+      "fase": "ambas",
+      "ordem": 20,
+      "fonte": "Manual 1.1",
+      "descricao": "Advogado da parte autora classificado como ofensor/captador",
+      "quando": {
+        "or": [
+          {
+            "==": [
+              {
+                "var": "diligencias.advogado.faixa"
+              },
+              "ofensor"
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "diligencias.advogado.captadorManual"
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "advogado_captador",
+          "motivo": "Patrono classificado como contumaz/captador (Manual 1.1)."
+        }
+      ]
+    },
+    {
+      "id": "conexao",
+      "fase": "ambas",
+      "ordem": 21,
+      "fonte": "Manual 1.2 a 1.4",
+      "descricao": "Outras ações conexas contra o grupo",
+      "quando": {
+        ">": [
+          {
+            "count": {
+              "var": "diligencias.conexao"
+            }
+          },
+          0
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "conexao",
+          "motivo": "Há ação da mesma parte, com a mesma causa de pedir, contra a mesma empresa, sem trânsito em julgado (Manual 1.2)."
+        },
+        {
+          "acao": "addPreliminar",
+          "preliminar": "abuso_direito_demandar",
+          "motivo": "Tese complementar à conexão (Manual 1.3)."
+        }
+      ]
+    },
+    {
+      "id": "gratuidade",
+      "fase": "ambas",
+      "ordem": 22,
+      "fonte": "Manual 1.4",
+      "descricao": "Revogação da gratuidade só quando houver conexão",
+      "quando": {
+        "and": [
+          {
+            ">": [
+              {
+                "count": {
+                  "var": "diligencias.conexao"
+                }
+              },
+              0
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "ficha.processo.pedeGratuidade"
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "revogacao_gratuidade",
+          "motivo": "Ajuizamento reiterado é incompatível com a hipossuficiência alegada (Manual 1.4)."
+        }
+      ]
+    },
+    {
+      "id": "litispendencia",
+      "fase": "ambas",
+      "ordem": 23,
+      "fonte": "Manual 1.5",
+      "descricao": "Ação idêntica pendente",
+      "quando": {
+        ">": [
+          {
+            "count": {
+              "var": "diligencias.litispendencia"
+            }
+          },
+          0
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "litispendencia",
+          "motivo": "Mesmas partes, mesmo pedido e mesma causa de pedir em ação ainda pendente (Manual 1.5)."
+        }
+      ]
+    },
+    {
+      "id": "coisa-julgada",
+      "fase": "ambas",
+      "ordem": 24,
+      "fonte": "Manual 1.6",
+      "descricao": "Ação idêntica transitada em julgado",
+      "quando": {
+        ">": [
+          {
+            "count": {
+              "var": "diligencias.coisaJulgada"
+            }
+          },
+          0
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "coisa_julgada",
+          "motivo": "Ação idêntica já julgada com trânsito em julgado (Manual 1.6)."
+        }
+      ]
+    },
+    {
+      "id": "exibicao-generica",
+      "fase": "triagem",
+      "ordem": 30,
+      "fonte": "Manual 12.3",
+      "descricao": "Pedido genérico de exibição: não antecipar documentos",
+      "quando": {
+        "some": [
+          {
+            "var": "decisao.teses"
+          },
+          {
+            "==": [
+              {
+                "var": "tese"
+              },
+              "exibicao.generica"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "aguardarDespacho",
+          "motivo": "Pedido genérico de exibição: aguardar o despacho e verificar sanção antes de definir documentos (Manual 12.3)."
+        }
+      ]
+    },
+    {
+      "id": "acordo-debito",
+      "fase": "triagem",
+      "ordem": 40,
+      "fonte": "Manual 8 e 13",
+      "descricao": "Cancelamento do débito automático",
+      "quando": {
+        "some": [
+          {
+            "var": "decisao.teses"
+          },
+          {
+            "==": [
+              {
+                "var": "tese"
+              },
+              "cancelamento_debito"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "acordo",
+          "motivo": "Cancelamento do débito automático: sem tutela deferida, solicitar cancelamento do débito e disponibilização de boletos (Manual 8)."
+        },
+        {
+          "acao": "alerta",
+          "nivel": "info",
+          "texto": "Verificar se há tutela deferida e formulário agendado para cumprimento (Manual 8)."
+        }
+      ]
+    },
+    {
+      "id": "acordo-beneficiario",
+      "fase": "triagem",
+      "ordem": 41,
+      "fonte": "Manual 13",
+      "descricao": "Beneficiário que recebe pelo Banco Crefisa",
+      "quando": {
+        "==": [
+          {
+            "var": "ficha.autor.recebeBeneficioPeloBancoCrefisa"
+          },
+          true
+        ]
+      },
+      "entao": [
+        {
+          "acao": "acordo",
+          "motivo": "Pasta envolvendo beneficiário que recebe pelo Banco Crefisa (Manual 13)."
+        }
+      ]
+    },
+    {
+      "id": "cheque-especial-requisicao",
+      "fase": "triagem",
+      "ordem": 42,
+      "fonte": "Manual 9",
+      "descricao": "Cheque especial: requisição no ProJuris",
+      "quando": {
+        "some": [
+          {
+            "var": "decisao.teses"
+          },
+          {
+            "==": [
+              {
+                "var": "tese"
+              },
+              "cheque_especial"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "alerta",
+          "nivel": "info",
+          "texto": "Abrir requisição no ProJuris (Dúvidas e Esclarecimentos > Cheque Especial) pedindo o aceite e o extrato da conta (Manual 9)."
+        }
+      ]
+    },
+    {
+      "id": "limpa-nome-antigo",
+      "fase": "parecer",
+      "ordem": 43,
+      "fonte": "Manual 4.1",
+      "descricao": "Limpa Nome com contrato anterior a 2016",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "==": [
+                  {
+                    "var": "tese"
+                  },
+                  "negativacao.limpa_nome"
+                ]
+              }
+            ]
+          },
+          {
+            "dataAntesDe": [
+              {
+                "var": "contrato.dataCelebracao"
+              },
+              "2016-01-01"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "alerta",
+          "nivel": "info",
+          "texto": "Contrato anterior a 2016: contrato e trilha podem ser dispensados; bastam demonstrativos e extratos SPC/Serasa (Manual 4.1)."
+        }
+      ]
+    },
+    {
+      "id": "nao-cliente",
+      "fase": "parecer",
+      "ordem": 50,
+      "fonte": "Manual 11",
+      "descricao": "SAG sem contrato em nome da parte",
+      "quando": {
+        "==": [
+          {
+            "var": "sag.encontrado"
+          },
+          false
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "nao_cliente",
+          "papel": "principal",
+          "motivo": "Consulta ao SAG não localizou contrato ativo, liquidado ou vinculado ao CPF (Manual 11)."
+        },
+        {
+          "acao": "alerta",
+          "nivel": "vermelho",
+          "texto": "Não é cliente: conferir a busca no SAG antes de usar a tese."
+        }
+      ]
+    },
+    {
+      "id": "prescricao-decenal",
+      "fase": "parecer",
+      "ordem": 60,
+      "fonte": "Manual 1.9.3",
+      "descricao": "10 anos da celebração, contrato liquidado",
+      "quando": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "contrato.status"
+              },
+              "liquidado"
+            ]
+          },
+          {
+            ">=": [
+              {
+                "anosDesde": [
+                  {
+                    "var": "contrato.dataCelebracao"
+                  },
+                  {
+                    "var": "hoje"
+                  }
+                ]
+              },
+              10
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "set",
+          "campo": "prescricao",
+          "valor": "decenal"
+        },
+        {
+          "acao": "addPreliminar",
+          "preliminar": "prescricao_decenal",
+          "motivo": "Mais de 10 anos desde a celebração de contrato liquidado (Manual 1.9.3)."
+        },
+        {
+          "acao": "bloquearDocumento",
+          "documento": "contrato",
+          "motivo": "Prescrição decenal: o contrato não deve ser apresentado em hipótese alguma (Manual 1.9.3).",
+          "providencia": "Se houver determinação judicial de juntada, com ou sem sanção: agravar da decisão."
+        }
+      ]
+    },
+    {
+      "id": "prescricao-quinquenal",
+      "fase": "parecer",
+      "ordem": 61,
+      "fonte": "Manual 1.9.2",
+      "descricao": "5 anos do último pagamento, contrato liquidado",
+      "quando": {
+        "and": [
+          {
+            "!=": [
+              {
+                "var": "decisao.campos.prescricao"
+              },
+              "decenal"
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.status"
+              },
+              "liquidado"
+            ]
+          },
+          {
+            ">=": [
+              {
+                "anosDesde": [
+                  {
+                    "var": "contrato.ultimoPagamento"
+                  },
+                  {
+                    "var": "hoje"
+                  }
+                ]
+              },
+              5
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "set",
+          "campo": "prescricao",
+          "valor": "quinquenal"
+        },
+        {
+          "acao": "addPreliminar",
+          "preliminar": "prescricao_quinquenal",
+          "motivo": "Mais de 5 anos desde o último pagamento de contrato liquidado (Manual 1.9.2)."
+        }
+      ]
+    },
+    {
+      "id": "quinquenal-sem-sancao",
+      "fase": "parecer",
+      "ordem": 62,
+      "fonte": "Manual 1.9.2",
+      "descricao": "Quinquenal em revisional/exibição/limpa nome/superendividamento/desconto: só junta com sanção",
+      "quando": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "decisao.campos.prescricao"
+              },
+              "quinquenal"
+            ]
+          },
+          {
+            "!": {
+              "some": [
+                {
+                  "var": "decisao.teses"
+                },
+                {
+                  "contem": [
+                    {
+                      "var": "tese"
+                    },
+                    "fraude"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "or": [
+                  {
+                    "contem": [
+                      {
+                        "var": "tese"
+                      },
+                      "revisional"
+                    ]
+                  },
+                  {
+                    "contem": [
+                      {
+                        "var": "tese"
+                      },
+                      "exibicao"
+                    ]
+                  },
+                  {
+                    "==": [
+                      {
+                        "var": "tese"
+                      },
+                      "negativacao.limpa_nome"
+                    ]
+                  },
+                  {
+                    "==": [
+                      {
+                        "var": "tese"
+                      },
+                      "superendividamento"
+                    ]
+                  },
+                  {
+                    "contem": [
+                      {
+                        "var": "tese"
+                      },
+                      "desconto"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "!=": [
+              {
+                "var": "decisaoJudicial.sancao"
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "bloquearDocumento",
+          "documento": "contrato",
+          "motivo": "Contrato prescrito (quinquenal) e sem sanção imposta pelo juízo: não apresentar (Manual 1.9.2).",
+          "providencia": "Se sobrevier decisão com sanção, juntar."
+        }
+      ]
+    },
+    {
+      "id": "quinquenal-com-sancao",
+      "fase": "parecer",
+      "ordem": 63,
+      "fonte": "Manual 1.9.2",
+      "descricao": "Quinquenal com sanção: juntar",
+      "quando": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "decisao.campos.prescricao"
+              },
+              "quinquenal"
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "decisaoJudicial.sancao"
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "juntarDocumento",
+          "documento": "contrato",
+          "motivo": "Prescrição quinquenal, mas há sanção imposta: apresentar (Manual 1.9.2)."
+        }
+      ]
+    },
+    {
+      "id": "fraude-junta-sempre",
+      "fase": "parecer",
+      "ordem": 64,
+      "fonte": "Manual 1.9.2",
+      "descricao": "Fraude: contrato e trilha sempre (salvo decenal)",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "contem": [
+                  {
+                    "var": "tese"
+                  },
+                  "fraude"
+                ]
+              }
+            ]
+          },
+          {
+            "!=": [
+              {
+                "var": "decisao.campos.prescricao"
+              },
+              "decenal"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "juntarDocumento",
+          "documento": "contrato",
+          "motivo": "Fraude: contrato é essencial para demonstrar a regularidade da contratação."
+        },
+        {
+          "acao": "juntarDocumento",
+          "documento": "trilha",
+          "motivo": "Fraude: trilha é essencial para demonstrar a regularidade da contratação."
+        }
+      ]
+    },
+    {
+      "id": "exibicao-banco",
+      "fase": "parecer",
+      "ordem": 65,
+      "fonte": "Manual 12.2",
+      "descricao": "Exibição de documentos bancários/consignado: apresentar sempre",
+      "quando": {
+        "some": [
+          {
+            "var": "decisao.teses"
+          },
+          {
+            "==": [
+              {
+                "var": "tese"
+              },
+              "exibicao.banco"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "juntarDocumento",
+          "documento": "documentos_exibicao",
+          "motivo": "Documentos de banco/consignado: apresentar independentemente de sanção (Manual 12.2)."
+        }
+      ]
+    },
+    {
+      "id": "exibicao-pessoal-nao-prescrito",
+      "fase": "parecer",
+      "ordem": 66,
+      "fonte": "Manual 12.1",
+      "descricao": "Exibição de empréstimo pessoal não prescrito",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "==": [
+                  {
+                    "var": "tese"
+                  },
+                  "exibicao.pessoal"
+                ]
+              }
+            ]
+          },
+          {
+            "!": {
+              "existe": {
+                "var": "decisao.campos.prescricao"
+              }
+            }
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "juntarDocumento",
+          "documento": "contrato",
+          "motivo": "Contrato não prescrito: apresentar independentemente de multa (Manual 12.1)."
+        }
+      ]
+    },
+    {
+      "id": "fraude-canal-filial",
+      "fase": "parecer",
+      "ordem": 70,
+      "fonte": "Manual 6.2",
+      "descricao": "Trilha indica contratação presencial",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "contem": [
+                  {
+                    "var": "tese"
+                  },
+                  "fraude"
+                ]
+              }
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.canal"
+              },
+              "filial"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.filial",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        }
+      ]
+    },
+    {
+      "id": "fraude-canal-rogo",
+      "fase": "parecer",
+      "ordem": 71,
+      "fonte": "Manual 6.3 e 13",
+      "descricao": "Contratação a rogo (analfabeto)",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "contem": [
+                  {
+                    "var": "tese"
+                  },
+                  "fraude"
+                ]
+              }
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.canal"
+              },
+              "filial_rogo"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.filial_rogo",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude.filial"
+        },
+        {
+          "acao": "addSubsidio",
+          "item": "Documentos de identificação das 2 testemunhas"
+        },
+        {
+          "acao": "acordo",
+          "motivo": "Fraude cliente iletrado / filial a rogo (Manual 13)."
+        }
+      ]
+    },
+    {
+      "id": "fraude-canal-whats",
+      "fase": "parecer",
+      "ordem": 72,
+      "fonte": "Manual 6.4",
+      "descricao": "Contratação pelo WhatsApp",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "contem": [
+                  {
+                    "var": "tese"
+                  },
+                  "fraude"
+                ]
+              }
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.canal"
+              },
+              "whats"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.whats",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        }
+      ]
+    },
+    {
+      "id": "fraude-canal-web",
+      "fase": "parecer",
+      "ordem": 73,
+      "fonte": "Manual 6.5",
+      "descricao": "Contratação pelo site",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "contem": [
+                  {
+                    "var": "tese"
+                  },
+                  "fraude"
+                ]
+              }
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.canal"
+              },
+              "web"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.web",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        }
+      ]
+    },
+    {
+      "id": "fraude-canal-app",
+      "fase": "parecer",
+      "ordem": 74,
+      "fonte": "Manual 6.6",
+      "descricao": "Contratação pelo aplicativo",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "contem": [
+                  {
+                    "var": "tese"
+                  },
+                  "fraude"
+                ]
+              }
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.canal"
+              },
+              "app"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.app",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        }
+      ]
+    },
+    {
+      "id": "fraude-toscana-ate",
+      "fase": "parecer",
+      "ordem": 75,
+      "fonte": "Manual 6.7",
+      "descricao": "Toscana até 23/08/2023: gravação",
+      "quando": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "contrato.canal"
+              },
+              "toscana"
+            ]
+          },
+          {
+            "dataAteInclusive": [
+              {
+                "var": "contrato.dataCelebracao"
+              },
+              "2023-08-23"
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.toscana_ate_2308",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        },
+        {
+          "acao": "addSubsidio",
+          "item": "Gravação da ligação telefônica (Toscana)"
+        }
+      ]
+    },
+    {
+      "id": "fraude-toscana-apos",
+      "fase": "parecer",
+      "ordem": 76,
+      "fonte": "Manual 6.8",
+      "descricao": "Toscana após 23/08/2023: Web Banco/Pessoal",
+      "quando": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "contrato.canal"
+              },
+              "toscana"
+            ]
+          },
+          {
+            "!": {
+              "dataAteInclusive": [
+                {
+                  "var": "contrato.dataCelebracao"
+                },
+                "2023-08-23"
+              ]
+            }
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.web",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        },
+        {
+          "acao": "alerta",
+          "nivel": "info",
+          "texto": "Toscana após 23/08/2023: analisar confirmação por selfie na trilha (Manual 6.8)."
+        }
+      ]
+    },
+    {
+      "id": "fraude-refin",
+      "fase": "parecer",
+      "ordem": 77,
+      "fonte": "Manual 6.1 e 13",
+      "descricao": "Refin recorrente/automático",
+      "quando": {
+        "==": [
+          {
+            "var": "contrato.canal"
+          },
+          "refin"
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "fraude.refin",
+          "papel": "principal"
+        },
+        {
+          "acao": "removerTese",
+          "tese": "fraude"
+        },
+        {
+          "acao": "acordo",
+          "motivo": "Fraude refin recorrente: informar que o cliente não reconhece e aguardar retorno sobre liquidação (Manual 6.1)."
+        }
+      ]
+    },
+    {
+      "id": "desconto-estorno",
+      "fase": "parecer",
+      "ordem": 80,
+      "fonte": "Manual 5.3 e 13",
+      "descricao": "Desconto de contrato em aberto há mais de 5 anos do último pagamento",
+      "quando": {
+        "and": [
+          {
+            "some": [
+              {
+                "var": "decisao.teses"
+              },
+              {
+                "contem": [
+                  {
+                    "var": "tese"
+                  },
+                  "desconto"
+                ]
+              }
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "contrato.status"
+              },
+              "aberto"
+            ]
+          },
+          {
+            ">=": [
+              {
+                "anosDesde": [
+                  {
+                    "var": "contrato.ultimoPagamento"
+                  },
+                  {
+                    "var": "hoje"
+                  }
+                ]
+              },
+              5
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addTese",
+          "tese": "desconto.estorno",
+          "papel": "principal"
+        },
+        {
+          "acao": "acordo",
+          "motivo": "Desconto de contrato em aberto há mais de 5 anos do último pagamento: abrir tentativa de acordo solicitando o estorno (Manual 5.3)."
+        }
+      ]
+    }
+  ],
+  "matrizSubsidios": {
+    "*": [
+      "Telas do SAG com todos os contratos do CPF (data de celebração, último pagamento e status liquidado/aberto)"
+    ],
+    "revisional": [
+      "Contrato e documentos contratuais"
+    ],
+    "revisional.pessoal": [
+      "Demonstrativo de crédito",
+      "Demonstrativo de débito (CTR)"
+    ],
+    "revisional.cartao": [
+      "Faturas do cartão com encargos de atraso"
+    ],
+    "superendividamento": [
+      "Contratos em aberto",
+      "Trilha",
+      "RET (retorno bancário do contrato)",
+      "CTR (demonstrativo de débito do contrato)"
+    ],
+    "negativacao": [
+      "Extrato SPC",
+      "Extrato Serasa"
+    ],
+    "negativacao.limpa_nome": [
+      "Demonstrativo de crédito",
+      "Demonstrativo de débito (CTR)",
+      "Contrato e trilha (dispensáveis se anterior a 2016)"
+    ],
+    "negativacao.scr": [
+      "Identificação do contrato inadimplente na data do SCR"
+    ],
+    "negativacao.orgaos": [
+      "Comprovante da negativação"
+    ],
+    "desconto": [
+      "Demonstrativo de crédito",
+      "Demonstrativo de débito (CTR)",
+      "Extratos bancários",
+      "Contrato",
+      "Telas sistêmicas"
+    ],
+    "desconto.conta": [
+      "Documentação que identifique a natureza da conta e a origem dos descontos"
+    ],
+    "fraude": [
+      "Contrato",
+      "Trilha da contratação",
+      "Selfie / confirmação digital",
+      "Gravação da ligação (se Toscana até 23/08/2023)",
+      "Termo de adesão ao refin recorrente e aceite (se refin)"
+    ],
+    "fraude.filial": [
+      "Documentos da contratação presencial"
+    ],
+    "fraude.filial_rogo": [
+      "Contrato com digital e assinatura a rogo",
+      "Documentos de identificação das 2 testemunhas"
+    ],
+    "fraude.whats": [
+      "Trilha da conversa no WhatsApp",
+      "Selfie de confirmação"
+    ],
+    "fraude.web": [
+      "Trilha",
+      "Confirmação digital (SMS)",
+      "Selfie"
+    ],
+    "fraude.app": [
+      "Trilha",
+      "Selfie de confirmação"
+    ],
+    "fraude.toscana_ate_2308": [
+      "Gravação da ligação telefônica"
+    ],
+    "fraude.refin": [
+      "Termo de adesão ao refin recorrente e aceite"
+    ],
+    "cancelamento_contrato": [
+      "Contrato",
+      "Demonstrativo de crédito",
+      "Demonstrativo de débito (CTR)",
+      "Telas sistêmicas"
+    ],
+    "cancelamento_debito": [
+      "Identificação do contrato em aberto que gera os descontos"
+    ],
+    "cheque_especial": [
+      "Aceite do cheque especial",
+      "Extrato da conta bancária"
+    ],
+    "mero_pagador": [
+      "Tela NFC (detalhe do benefício previdenciário junto ao Banco Crefisa)",
+      "Demonstrativos de crédito",
+      "Extrato da conta bancária"
+    ],
+    "exibicao.pessoal": [
+      "Contrato de empréstimo pessoal"
+    ],
+    "exibicao.banco": [
+      "Documentos bancários solicitados (contrato consignado, extrato, termo de abertura)"
+    ]
+  },
+  "tiposAcordo": [
+    "cancelamento_debito",
+    "fraude.refin",
+    "fraude.filial_rogo",
+    "desconto.estorno",
+    "beneficiario_banco"
+  ],
+  "emails": {
+    "subsidio": {
+      "assunto": "[{{codigo}}] Subsídios — {{numeroProcesso}} — {{autor}}",
+      "corpo": "Prezados,\n\nSolicitamos os subsídios abaixo para a defesa no processo {{numeroProcesso}} ({{orgao}}).\n\nParte autora: {{autor}} — CPF {{cpf}}\nContratos citados na inicial: {{contratos}}\nTese(s) identificada(s): {{teses}}\nPrazo para contestação: {{prazo}}\n\nDocumentos:\n{{#itens}}- {{item}}\n{{/itens}}\nPor favor, responda a este e-mail mantendo o código {{codigo}} no assunto, com os documentos em anexo.\n\nAtenciosamente,\n{{escritorio}}"
+    },
+    "acordo": {
+      "assunto": "[{{codigo}}] Tentativa de acordo — {{numeroProcesso}} — {{autor}}",
+      "corpo": "Prezados,\n\nPara o processo {{numeroProcesso}}, o manual prevê atuação prévia do time de acordos:\n\n{{#motivos}}- {{motivo}}\n{{/motivos}}\nParte autora: {{autor}} — CPF {{cpf}}\nPrazo para contestação: {{prazo}}\n\nAguardamos o retorno para finalizar a estratégia de defesa. Mantenha o código {{codigo}} no assunto.\n\nAtenciosamente,\n{{escritorio}}"
+    },
+    "complemento": {
+      "assunto": "[{{codigo}}] Complemento de subsídios — {{numeroProcesso}}",
+      "corpo": "Prezados,\n\nRecebemos parte dos subsídios do processo {{numeroProcesso}}. Ainda faltam:\n\n{{#itens}}- {{item}}\n{{/itens}}\nMantenha o código {{codigo}} no assunto.\n\nAtenciosamente,\n{{escritorio}}"
+    }
+  },
+  "blocos": {
+    "_aviso": "Textos-base provisórios. Substituir pelos blocos aprovados do escritório (tela de pacotes). Variáveis entre chaves duplas.",
+    "abertura": "{{reuNome}}, pessoa jurídica inscrita no CNPJ sob o nº {{reuCnpj}}, nos autos da ação ajuizada por {{autor}}, processo nº {{numeroProcesso}}, vem apresentar CONTESTAÇÃO, pelos fatos e fundamentos a seguir.",
+    "fatos": "{{sinteseFatos}}",
+    "preliminar.advogado_captador": "[BLOCO APROVADO: advogado captador / litigância predatória — inserir texto padrão do escritório]",
+    "preliminar.conexao": "Tramita(m) ação(ões) da mesma parte autora, com idêntica causa de pedir, em face da mesma ré: {{processosConexos}}. Requer-se a reunião dos feitos para julgamento conjunto.",
+    "preliminar.abuso_direito_demandar": "[BLOCO APROVADO: abuso do direito de demandar]",
+    "preliminar.revogacao_gratuidade": "[BLOCO APROVADO: revogação da gratuidade da justiça]",
+    "preliminar.litispendencia": "Há litispendência com o processo {{processosLitispendencia}}, com as mesmas partes, o mesmo pedido e a mesma causa de pedir, razão pela qual se requer a extinção do feito sem resolução do mérito.",
+    "preliminar.coisa_julgada": "A pretensão já foi decidida no processo {{processosCoisaJulgada}}, com trânsito em julgado, impondo-se a extinção do feito sem resolução do mérito.",
+    "preliminar.retificacao_polo_passivo": "O produto discutido é de responsabilidade de {{poloCorretoNome}} (CNPJ {{poloCorretoCnpj}}), devendo ser retificado o polo passivo.",
+    "preliminar.ilegitimidade_ativa": "[BLOCO APROVADO: ilegitimidade ativa — contrato celebrado pelo representante em nome próprio]",
+    "preliminar.prescricao_quinquenal": "[BLOCO APROVADO: prescrição quinquenal — último pagamento em {{contratoUltimoPagamento}}]",
+    "preliminar.prescricao_decenal": "[BLOCO APROVADO: prescrição decenal — contrato celebrado em {{contratoDataCelebracao}}]",
+    "preliminar.exclusao_caixa": "[BLOCO APROVADO: exclusão da Caixa do polo passivo]",
+    "merito.*": "[BLOCO APROVADO: mérito — {{teseNome}}]",
+    "pedidos": "Diante do exposto, requer o acolhimento das preliminares arguidas e, no mérito, a total improcedência dos pedidos, com a condenação da parte autora nos ônus da sucumbência.",
+    "fecho": "Termos em que, pede deferimento.\n\n{{cidade}}, {{data}}.\n\n{{advogadoNome}}\nOAB {{advogadoOab}}"
+  },
+  "prompts": {
+    "classificacao": "Você classifica páginas de autos de processos cíveis contra instituições financeiras. Para cada documento, identifique os trechos (faixas de páginas) e o tipo de cada um.",
+    "extracao": "Você é analista jurídico do escritório e preenche a Ficha da Inicial em processos do grupo Crefisa. Leia a petição inicial e os anexos. Extraia SOMENTE o que estiver escrito, com a página e um trecho literal curto como evidência. Campo não encontrado = null. Não deduza CPF, contrato ou valores que não estejam no texto.",
+    "triagem": "Você aplica o MANUAL INTERNO DE ANÁLISE abaixo para enquadrar o núcleo da controvérsia. Escolha teses apenas da taxonomia fornecida. Responda às perguntas-chave do capítulo 15 citando o trecho da inicial. Não decida prescrição, polo passivo nem acordo: isso é feito por regras depois.",
+    "comparacao": "Compare a ação atual com outra ação da mesma parte e diga se há identidade de pedido e de causa de pedir, segundo os conceitos de conexão, litispendência e coisa julgada do manual.",
+    "subsidio": "Você lê subsídios enviados pela Crefisa (telas do SAG, contratos, trilhas, extratos, demonstrativos, transcrições de gravações) e extrai os dados pedidos, com página e trecho como evidência.",
+    "parecer": "Você redige o parecer de defesa a partir da ficha, das diligências, dos subsídios e da decisão de regras já tomada. As decisões de regras (prescrição, polo passivo, documentos bloqueados, acordo) são definitivas: explique-as, não as altere. Aponte riscos e pendências.",
+    "fatos": "Redija a síntese dos fatos da contestação em 2 a 4 parágrafos, em linguagem forense objetiva, apenas com o que consta na inicial e nos subsídios. Não cite jurisprudência nem dispositivos legais. Não invente datas, valores ou nomes."
+  },
+  "conferencia": {
+    "_comentario": "Conferência das peças antes de liberar/protocolar. 'pedidos': para cada pedido da ficha, a expressão que mostra que a peça o impugna. 'regrasExtras': regras próprias do escritório (padrao = regex). 'desligar': ids de regras a ignorar.",
+    "modoPadrao": "protocolo",
+    "minMaiusculas": 0.7,
+    "pedidos": {
+      "declaratoria_inexistencia": {
+        "nome": "Declaração de inexistência do débito/contrato",
+        "defesa": "inexist[êe]ncia|rela[çc][ãa]o jur[íi]dica|regularidade da contrata[çc][ãa]o|contrata[çc][ãa]o (?:v[áa]lida|regular|leg[íi]tima)"
+      },
+      "repeticao_indebito": {
+        "nome": "Repetição do indébito",
+        "defesa": "repeti[çc][ãa]o|restitui[çc][ãa]o"
+      },
+      "repeticao_em_dobro": {
+        "nome": "Repetição em dobro",
+        "defesa": "em dobro|art(?:igo|\\.)? ?42"
+      },
+      "dano_moral": {
+        "nome": "Danos morais",
+        "defesa": "danos? mora(?:l|is)"
+      },
+      "revisao_juros": {
+        "nome": "Revisão dos juros",
+        "defesa": "taxa (?:m[ée]dia|de juros)|abusividade|1\\.061\\.530"
+      },
+      "exibicao_documentos": {
+        "nome": "Exibição de documentos",
+        "defesa": "exibi[çc][ãa]o"
+      },
+      "cancelamento_debito_automatico": {
+        "nome": "Cancelamento do débito automático",
+        "defesa": "d[ée]bito autom[áa]tico"
+      },
+      "cancelamento_contrato": {
+        "nome": "Cancelamento do contrato",
+        "defesa": "cancelamento|rescis[ãa]o"
+      },
+      "repactuacao": {
+        "nome": "Repactuação / superendividamento",
+        "defesa": "repactua|superendividamento|plano de pagamento"
+      },
+      "exclusao_negativacao": {
+        "nome": "Exclusão da negativação",
+        "defesa": "negativa[çc][ãa]o|cadastros? de (?:prote[çc][ãa]o|inadimplentes)|exerc[íi]cio regular"
+      },
+      "tutela_urgencia": {
+        "nome": "Tutela de urgência",
+        "defesa": "tutela"
+      }
+    },
+    "regrasExtras": [],
+    "desligar": []
+  }
+}

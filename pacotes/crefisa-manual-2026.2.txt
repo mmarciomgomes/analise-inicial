@@ -1,0 +1,768 @@
+MANUAL INTERNO ANÁLISE DE PROCESSOS PARA ELABORAÇÃO DE CONTESTAÇÃO — versão 2026.2
+
+1. PRELIMINARES GERAIS
+1.1 ADVOGADO CAPTADOR
+
+Explicação: A análise deve ser realizada em todos os novos processos distribuídos.
+Como identificar: Consultar o cadastro do processo no ProJuris e verificar se há tarja ou
+apontamento indicando que o patrono da parte autora é classificado internamente como
+advogado contumaz ou captador.
+Providência a ser adotada: Constatada a indicação no sistema, registrar a informação na
+análise inicial do processo para avaliação das teses processuais cabíveis e do histórico de
+demandas semelhantes patrocinadas pelo mesmo advogado.
+Ponto de atenção: A identificação deve ser realizada logo na análise inicial, para que a
+informação seja considerada juntamente com as demais preliminares e teses defensivas.
+1.2 CONEXÃO
+
+Explicação: A análise deve ser realizada sempre que houver indícios de múltiplas ações
+ajuizadas pela mesma parte autora em face da Crefisa CFI ou do Banco Crefisa.
+Como identificar: Realizar pesquisa pelo CPF da parte autora no portal do tribunal
+competente e verificar a existência de outras ações envolvendo a mesma parte.
+Requisitos para configuração da conexão:
+• As ações possuírem a mesma causa de pedir;
+• As ações estiverem em fase de conhecimento ou instrução;
+• Não houver trânsito em julgado;
+• A mesma empresa figurar no polo passivo das demandas.
+Providência a ser adotada: Identificada a conexão, incluir a respectiva preliminar na peça
+processual, indicando os processos relacionados e demonstrando a identidade das questões
+discutidas.
+Ponto de atenção: A simples existência de outras ações propostas pela parte autora não
+caracteriza conexão. É indispensável a presença dos requisitos acima.
+1.3 ABUSO DO DIREITO DE DEMANDAR
+
+Explicação: Esta preliminar deve ser suscitada sempre que for identificada hipótese de
+conexão.
+Fundamento: A existência de diversas ações semelhantes, baseadas na mesma causa de
+pedir ou em fatos correlatos, pode evidenciar o fracionamento indevido de pretensões e o
+uso inadequado da atividade jurisdicional.
+
+5
+
+Objetivo da tese: Reforçar a argumentação de que a parte autora promoveu o ajuizamento
+reiterado de demandas relacionadas ao mesmo contexto fático ou contratual, em afronta aos
+princípios da boa-fé processual, da cooperação e da economia processual.
+Ponto de atenção: A tese possui caráter complementar e deve ser utilizada em conjunto
+com a preliminar de conexão.
+1.4 DA NECESSIDADE DE REVOGAÇÃO DA GRATUIDADE DA JUSTIÇA
+
+Explicação: Esta preliminar deve ser analisada e suscitada apenas nos casos em que
+também houver fundamento para a preliminar de conexão.
+Fundamento: O ajuizamento simultâneo ou reiterado de diversas demandas pode revelar
+circunstâncias incompatíveis com a alegada hipossuficiência econômica ou justificar maior
+aprofundamento da análise dos requisitos para concessão do benefício.
+1.5 LITISPENDÊNCIA
+
+Explicação: A análise deve ser realizada em todos os processos mediante pesquisa pelo
+CPF da parte autora.
+Como identificar: Verificar se existe outra ação em andamento que possua:
+• As mesmas partes;
+• O mesmo pedido;
+• A mesma causa de pedir.
+Conceito: Há litispendência quando uma nova ação reproduz outra demanda já
+anteriormente ajuizada e ainda pendente de julgamento definitivo.
+Providência a ser adotada: Identificada a identidade entre as demandas, suscitar a
+preliminar de litispendência, requerendo a extinção do processo sem resolução do mérito,
+nos termos da legislação processual aplicável.
+Ponto de atenção: A ausência de qualquer um dos três elementos identificadores (partes,
+pedido e causa de pedir) afasta a configuração da litispendência.
+1.6 DA COISA JULGADA
+
+Explicação: É necessário realizar a busca pelo CPF da parte autora e verificar se há outra
+ação idêntica já julgada.
+Como identificar: Verificar se existe ação anterior que possua:
+•
+•
+•
+•
+
+As mesmas partes;
+O mesmo pedido;
+A mesma causa de pedir;
+E que já tenha sido julgada por decisão de mérito transitada em julgado.
+
+6
+
+Conceito: Configura-se a coisa julgada quando é proposta nova ação reproduzindo
+demanda anteriormente decidida por sentença de mérito contra a qual não cabe mais
+recurso.
+Providência a ser adotada: Constatada a identidade entre as ações e o trânsito em julgado
+da demanda anterior, suscitar a preliminar de coisa julgada, requerendo a extinção do
+processo sem resolução do mérito.
+Ponto de atenção: É indispensável confirmar o trânsito em julgado da ação anterior. Caso
+o processo paradigma ainda esteja pendente de recurso ou de julgamento definitivo, a
+hipótese poderá caracterizar conexão ou litispendência, mas não coisa julgada.
+1.7 RETIFICAÇÃO DO POLO PASSIVO
+
+Explicação: Em toda nova ação, deve ser conferida a correta identificação da empresa ré
+qualificada na petição inicial, pois a definição da parte legítima depende do produto ou
+serviço discutido na demanda.
+Como identificar: Analisar o contrato juntado aos autos ou, na ausência dele, a natureza da
+pretensão deduzida na petição inicial para verificar qual empresa integra a relação jurídica
+discutida.
+Regras de enquadramento:
+• Empréstimo Pessoal: quando a ação discutir contrato de empréstimo pessoal, a parte
+legítima para figurar no polo passivo é CREFISA S/A – CRÉDITO,
+FINANCIAMENTO E INVESTIMENTOS, CNPJ nº 60.779.196/0001-96.
+• Empréstimo Consignado: quando a ação discutir contrato de empréstimo consignado, a
+parte legítima para figurar no polo passivo é BANCO CREFISA S/A, CNPJ nº
+61.033.106/0001-86.
+• Benefício INSS, Cartão de Crédito e Conta Bancária: quando a demanda tratar de
+liberação de benefício previdenciário (INSS), cartão de crédito, manutenção de conta
+bancária ou serviços bancários em geral, a parte legítima para figurar no polo passivo é
+BANCO CREFISA S/A, CNPJ nº 61.033.106/0001-86.
+Providência a ser adotada: Identificada divergência entre a empresa indicada na petição
+inicial e a empresa efetivamente responsável pelo produto ou serviço discutido, deverá ser
+suscitada a preliminar de ilegitimidade passiva, com pedido de retificação do polo passivo ou
+exclusão da parte indevidamente demandada, conforme as particularidades do caso
+concreto.
+Ponto de atenção: A análise deve ser realizada com base no contrato efetivamente
+discutido na ação e cadastramento no portal do tribunal. A simples menção à marca
+“Crefisa” na petição inicial não é suficiente para identificar a parte legítima, sendo
+
+7
+
+indispensável verificar qual empresa figura como contratante no instrumento contratual ou
+qual instituição é responsável pelo produto ou serviço objeto da demanda.
+1.8 ILEGITIMIDADE ATIVA
+
+Explicação: Em regra, a ilegitimidade ativa deve ser arguida quando o autor da ação não é o
+titular da relação jurídica discutida no processo, embora esteja representado nos autos por
+quem efetivamente contratou.
+Como identificar: Verifique se:
+• O autor da ação é menor de idade ou incapaz e está representado por seu responsável
+legal;
+• A petição inicial impugna determinado contrato ou desconto;
+• O contrato apresentado nos autos foi celebrado pelo representante legal em nome
+próprio, e não pelo autor da ação.
+Exemplo prático: Um menor, representado por sua genitora, ajuíza ação alegando
+descontos indevidos em seu benefício previdenciário decorrentes de contrato que afirma não
+reconhecer. Ao analisar a documentação contratual, constata-se que o contrato foi celebrado
+pela própria genitora, em nome próprio, figurando ela como contratante e titular da relação
+jurídica.
+Tese aplicável: Nessa situação, o menor não possui legitimidade ativa para questionar a
+validade do contrato, pois não participou da contratação e não é titular dos direitos e
+obrigações dela decorrentes. A eventual discussão sobre a existência, validade ou
+regularidade do negócio jurídico deve ser promovida pela pessoa que efetivamente celebrou
+o contrato, ou seja, a representante legal.
+1.9 PRESCRIÇÃO QUINQUENAL E DECENAL
+
+Explicação: A prescrição deve ser analisada em todos os processos que envolvam contratos
+da Crefisa, sendo necessário verificar a data do último pagamento e a data de celebração do
+contrato para identificar qual regra deve ser aplicada.
+Como regra interna, considera-se que, para a Crefisa, o contrato somente prescreve
+quando estiver liquidado. Portanto, não basta que tenha transcorrido determinado
+período desde a contratação: é necessário verificar também se o contrato permanece em
+aberto ou se já foi efetivamente liquidado.
+A análise da prescrição é especialmente importante para definir se os documentos
+relacionados ao contrato deverão ou não ser apresentados na defesa, bem como para
+verificar eventual necessidade de recurso caso seja determinada judicialmente a apresentação
+de contrato já prescrito.
+
+8
+
+1.9.1 Como identificar a prescrição:
+
+Para realizar a análise, deve-se consultar o SAG e verificar:
+a) a data de celebração do contrato;
+b) a data do último pagamento realizado;
+c) se o contrato está liquidado ou em aberto;
+d) qual é o tipo de ação proposta pela parte autora;
+e) se houve determinação judicial para apresentação dos documentos;
+f) se a decisão estabeleceu alguma sanção pelo não cumprimento, como multa pecuniária,
+busca e apreensão, determinação “sob as penas da lei” ou aplicação do art. 400 do CPC.
+Após essas verificações, deve-se identificar se o caso se enquadra na prescrição
+quinquenal ou decenal e, a partir disso, definir quais documentos poderão ou deverão ser
+apresentados.
+1.9.2 Prescrição quinquenal
+
+Critério de análise:
+A prescrição quinquenal deve ser analisada contando-se 5 (cinco) anos a partir da data do
+último pagamento realizado no contrato.
+Assim, deve-se localizar no SAG a data do último pagamento e verificar se já transcorreram
+5 anos desde essa data.
+Providência a ser tomada:
+Após identificar que o contrato se encontra na hipótese de prescrição quinquenal, deve-se
+observar qual é o tipo de ação para definir se os documentos serão apresentados.
+Nas ações revisionais, de exibição, serasa limpa nome, superendividamento e desconto
+indevido, se o contrato estiver prescrito, somente serão apresentados os documentos
+caso exista imposição de alguma sanção pelo juízo.
+
+9
+
+Já nas ações de fraude, o contrato e a trilha deverão ser apresentados independentemente de
+pena de multa, tendo em vista que são documentos essenciais para demonstrar a validade e
+regularidade da contratação.
+1.9.3 Prescrição decenal
+
+Critério de análise:
+A prescrição decenal é analisada contando-se 10 (dez) anos a partir da data de celebração
+do contrato.
+Nesse caso, a análise é feita com base na data em que o contrato foi celebrado, e não na data
+do último pagamento.
+Providência a ser tomada:
+Constatado que já transcorreram 10 anos desde a celebração do contrato, aplica-se a regra
+interna específica da prescrição decenal:
+Não deverá ser apresentado o contrato, sob hipótese alguma.
+Dessa forma, ainda que exista determinação judicial para apresentação do documento ou
+imposição de sanção, o contrato não deverá ser apresentado.
+Caso o juízo determine a apresentação do contrato prescrito pela regra decenal e estabeleça
+alguma sanção para o descumprimento da ordem, não deverá ser realizada a juntada do
+contrato.
+Nessa situação, a providência cabível é agravar da decisão, buscando a reforma da
+determinação judicial.
+Ponto de atenção:
+A existência de multa, busca e apreensão, determinação “sob as penas da lei” ou aplicação
+do art. 400 do CPC não altera a regra da prescrição decenal. Diferentemente da
+prescrição quinquenal, na qual a existência de sanção pode determinar a apresentação dos
+documentos em determinadas modalidades de ação, na prescrição decenal o contrato não
+deve ser apresentado em nenhuma hipótese, devendo-se recorrer da decisão caso haja
+determinação nesse sentido.
+
+10
+
+2. REVISIONAL
+As ações revisionais têm por objetivo a revisão de cláusulas contratuais consideradas
+excessivas, especialmente aquelas relacionadas a juros, encargos, multa e demais condições
+financeiras da contratação. Nessas demandas, a parte autora, em regra, sustenta a existência
+de onerosidade excessiva, alegando que as taxas aplicadas estariam acima dos parâmetros
+admitidos ou em desconformidade com as diretrizes pertinentes à modalidade contratual.
+No âmbito do manual, as revisionais podem ser separadas, especialmente, em:
+a) revisional de empréstimo pessoal;
+b) revisional de empréstimo consignado;
+c) revisional de juros de cartão de crédito.
+2.1 REVISIONAL – EMPRÉSTIMO CONSIGNADO
+Explicação: As ações revisionais têm por objetivo a revisão de cláusulas contratuais
+consideradas excessivas, especialmente aquelas relacionadas a juros, encargos, multa e
+demais condições financeiras da contratação. Na revisional de empréstimo consignado, a
+discussão envolve contratos consignados e, em regra, a parte autora sustenta que as taxas
+aplicadas são excessivas ou estão em desacordo com os parâmetros que entende aplicáveis à
+modalidade.
+Providência a ser tomada: Verificar se o contrato discutido é efetivamente de empréstimo
+consignado, quais cláusulas estão sendo impugnadas e se a documentação dos autos
+corresponde ao contrato objeto da ação. Nesses casos, não há RET.
+Pontos de atenção: O Banco Central emite parâmetros e diretrizes aplicáveis às operações
+de crédito, devendo ser analisados os parâmetros pertinentes à modalidade e ao período da
+contratação. É essencial não confundir a revisional de consignado com a revisional de
+empréstimo pessoal.
+2.2 REVISIONAL – EMPRÉSTIMO PESSOAL
+
+Explicação: Na revisional de empréstimo pessoal, a parte autora busca a revisão das
+cláusulas financeiras do contrato de empréstimo pessoal, especialmente juros, encargos,
+multa e demais condições, alegando onerosidade excessiva ou que as taxas seriam muito
+elevadas ou estariam em desacordo com parâmetros aplicáveis.
+Providência a ser tomada: Confirmar que o contrato discutido é de empréstimo pessoal,
+identificar as cláusulas impugnadas e analisar os documentos contratuais pertinentes.
+Pontos de atenção: A modalidade contratual deve ser corretamente identificada antes da
+escolha do modelo de defesa. A análise deve ser feita considerando as condições
+efetivamente pactuadas e os parâmetros aplicáveis ao contrato.
+
+11
+
+2.3 REVISIONAL – JUROS DE CARTÃO DE CRÉDITO
+
+Explicação: Nas revisionais de juros de cartão de crédito, a parte autora impugna
+especificamente os juros e encargos incidentes em razão do atraso no pagamento da fatura
+de cartão de crédito.
+Providência a ser tomada: Identificar que a controvérsia está restrita aos juros decorrentes
+do atraso no pagamento da fatura e utilizar o modelo específico de defesa para revisional de
+juros de cartão de crédito.
+Pontos de atenção: Não utilizar automaticamente o modelo de revisional de empréstimo
+pessoal ou consignado. A discussão está vinculada aos encargos do cartão de crédito e deve
+ser tratada conforme o modelo específico.
+
+3. SUPERENDIVIDAMENTO
+Explicação: O superendividamento é a ação em que a parte consumidora busca renegociar
+o conjunto de suas dívidas de consumo, reunindo os credores em uma única demanda e
+apresentando um plano de pagamento, com indicação de como pretende quitar cada
+obrigação. No procedimento, devem ser consideradas as dívidas de consumo passíveis de
+repactuação. A disciplina foi inserida no Código de Defesa do Consumidor pela Lei nº
+14.181/2021, especialmente nos arts. 54-A e 104-A.
+Providência a ser tomada: Na análise do processo, verificar: (a) qual é a empresa
+corretamente indicada no polo passivo; (b) quais documentos foram juntados pela parte
+autora; (c) quais contratos a parte possui em aberto, inclusive mediante consulta ao SAG; e
+(d) se a demanda se refere a dívidas passíveis de repactuação. Para a defesa, devem ser
+reunidos, conforme o caso, o contrato, a trilha, o RET e o CTR.
+Pontos de atenção: O superendividamento, para fins deste manual, deve ser analisado em
+relação aos contratos que estejam em aberto e que integrem a pretensão de repactuação. A
+consulta ao SAG é essencial para identificar os contratos em aberto e conferir se os
+documentos juntados pela parte correspondem às operações efetivamente existentes.
+
+4. NEGATIVAÇÃO
+Explicação: Nas ações de negativação, devem ser observadas, de forma separada, três teses
+distintas: negativação SCR, negativação em órgãos de proteção ao crédito e negativação
+Serasa Limpa Nome. Cada uma possui natureza própria, dinâmica probatória específica e
+forma diferente de tratamento na defesa.
+4.1 – NEGATIVAÇÃO SERASA LIMPA NOME
+
+Explicação: A negativação Serasa Limpa Nome não se confunde com negativação
+propriamente dita. Trata-se de plataforma de negociação e proposta de acordos
+disponibilizada pelo Serasa, sem que isso implique, necessariamente, restrição ao crédito ou
+
+12
+
+inscrição em cadastro negativo. A existência de ofertas na plataforma pode envolver dívidas
+antigas ou recentes.
+Providência a ser tomada: Na defesa, alegar que a existência de lançamento no Serasa
+Limpa Nome não caracteriza negativação, mas apenas proposta de acordo. Também deve
+ser solicitado o extrato SPC e Serasa para demonstrar que a parte não foi efetivamente
+negativada.
+Pontos de atenção: Pode haver oferta de acordo referente a contratos muito antigos. Se o
+contrato for antigo, como nos exemplos anteriores a 2016, pode não ser necessário solicitar
+contrato e trilha no ProJuris, sendo suficiente a juntada do demonstrativo de crédito,
+demonstrativo de débito e extratos SPC e Serasa, conforme a estratégia adotada no caso
+concreto.
+4.2 – NEGATIVAÇÃO – SCR
+
+Explicação: A negativação SCR diz respeito ao relatório emitido pelo Banco Central por
+meio do sistema Registrato. Trata-se de mecanismo de controle utilizado pelas instituições
+financeiras, com impacto principalmente na análise e aprovação de crédito, especialmente
+em operações de financiamento. Na defesa, sustenta-se que o SCR não configura
+negativação propriamente dita, mas sim registro de caráter informativo e controle dos
+bancos, não se confundindo com inscrição restritiva em cadastro de inadimplentes.
+Providência a ser tomada: Na análise da ação, verificar no relatório SCR a data indicada e,
+a partir dela, consultar o SAG para identificar qual contrato estava inadimplente naquele
+período. É possível que a ação esteja relacionada a contrato já liquidado. Também deve ser
+solicitado o extrato SPC e Serasa, a fim de confirmar a inexistência de negativação
+propriamente dita.
+Pontos de atenção: A identificação correta do contrato depende da correspondência entre
+a data lançada no SCR e a situação contratual existente no SAG. Não se deve presumir que
+o apontamento decorre necessariamente do contrato atualmente discutido, pois pode haver
+vínculo com contrato antigo ou já encerrado.
+4.3 – NEGATIVAÇÃO – ÓRGÃOS DE PROTEÇÃO
+
+Explicação: A negativação em órgãos de proteção ao crédito é a negativação propriamente
+dita, na qual a parte autora efetivamente permanece com o nome restrito em razão de
+inadimplência contratual. Nessa hipótese, o crédito encontra-se de fato comprometido
+porque houve descumprimento de obrigação, normalmente a partir do inadimplemento de
+alguma parcela.
+Providência a ser tomada: Na defesa, deve-se confirmar a existência da negativação e
+demonstrar que ela decorre da inadimplência da própria parte. Também deve ser solicitado o
+
+13
+
+extrato SPC e Serasa, podendo ser juntada a negativação existente, por se tratar de restrição
+devida.
+Pontos de atenção: É importante demonstrar o nexo entre a inadimplência e a inscrição
+restritiva, de modo a afastar a alegação de negativação indevida. Ainda que conste
+apontamento nos órgãos de proteção, a defesa pode sustentar sua legitimidade quando
+evidenciado o inadimplemento contratual.
+
+5. DESCONTO INDEVIDO
+5.1 DESCONTO INDEVIDO PADRÃO
+
+Explicação: O desconto indevido padrão é utilizado quando a parte autora reconhece a
+celebração do contrato, mas afirma que está sendo cobrado valor superior ao efetivamente
+devido. Em regra, trata-se de cobrança de juros, multa ou encargos incidentes sobre parcela
+inadimplida, comumente em valores como R$ 33,39 ou R$ 31,29, conforme a dinâmica
+contratual do caso concreto.
+Hipótese de contrato com alegação de quitação: Também se enquadram nessa hipótese
+os casos em que a parte alega ter quitado integralmente o contrato, mas continua sofrendo
+cobranças. Nessa situação, deve-se verificar se houve inadimplemento em algum momento
+da relação contratual, pois o atraso de uma única parcela pode postergar o termo final do
+contrato e justificar a continuidade dos lançamentos.
+Providência a ser tomada: Verificar se a parte reconhece o contrato; qual valor está sendo
+descontado a maior; se o valor corresponde a juros, multa ou encargos de inadimplência; se
+houve atraso de parcela em algum momento; e se a data de término contratual foi impactada
+por inadimplemento anterior. Identificada essa hipótese, utilizar o modelo de desconto
+indevido padrão, com análise dos documentos necessários.
+Pontos de atenção: Não confundir essa tese com cancelamento de contrato ou inexistência
+de contratação. Nos casos em que a autora afirma ter quitado o contrato, é indispensável
+conferir se não houve atraso de parcela, ainda que pontual, pois isso pode alterar o
+encerramento da operação e justificar os lançamentos posteriores.
+5.2 DESCONTO INDEVIDO – DESCONTO EM CONTA E NÃO NO BENEFÍCIO
+
+Explicação: Ocorre quando a parte autora alega que os descontos estão sendo realizados
+exclusivamente sobre o valor recebido em conta, geralmente referente a benefício social,
+como o Bolsa Família, sustentando que se trata de conta social e não de conta corrente
+comum. A parte pretende o cancelamento dos descontos incidentes sobre esse crédito.
+Tese defensiva: A defesa deve demonstrar que o desconto ocorre em conta corrente
+indicada pela própria parte autora, e não diretamente no benefício social, devendo ser
+analisada a natureza da conta e a forma como os lançamentos foram realizados.
+
+14
+
+Providência a ser tomada: Verificar a natureza da conta utilizada para os descontos; se a
+conta foi indicada pela própria autora; se os lançamentos atingem benefício social ou saldo
+de conta corrente; qual é a documentação contratual e bancária disponível; e se a parte
+incluiu a Caixa no polo passivo.
+Pontos de atenção: É muito comum que essas ações sejam ajuizadas na Justiça Federal,
+com inclusão da Caixa no polo passivo. Se a Caixa estiver indicada como ré, deve ser
+analisada a necessidade de preliminar de exclusão da Caixa do polo passivo, quando ela não
+for a instituição responsável pela contratação discutida. Também é essencial distinguir a
+conta social do saldo movimentado em conta corrente.
+Documentos de apoio: Demonstrativo de crédito; demonstrativo de débito; extratos
+bancários; contrato; telas sistêmicas pertinentes; e documentação que permita identificar a
+natureza da conta e a origem dos descontos.
+5.3 DESCONTO INDEVIDO – ESTORNO
+
+Explicação: É utilizado quando a parte autora alega ter sofrido um desconto indevido em
+sua conta e, normalmente, não reconhece a origem da cobrança.
+Providência a ser tomada: Consultar o SAG para identificar a origem do desconto e a qual
+contrato ele está relacionado. Verificar a situação do contrato e a data do pagamento da
+última parcela. Se o desconto estiver relacionado a contrato que esteja em aberto há mais de
+5 (cinco) anos desde o pagamento da última parcela, abrir uma requisição de tentativa de
+acordo solicitando o estorno do valor descontado.
+Pontos de atenção: A ausência de reconhecimento do contrato pela parte autora não
+impede a solicitação do estorno quando preenchido o requisito temporal. O ponto principal
+é confirmar, no SAG, que o desconto está relacionado a contrato em aberto há mais de 5
+anos desde o pagamento da última parcela.
+Fluxo resumido: Contrato em aberto há mais de 5 anos desde o pagamento da última
+parcela → abrir requisição de tentativa de acordo → solicitar estorno do valor descontado.
+
+6. FRAUDE
+Explicação: As ações de fraude são aquelas em que a parte autora não reconhece a
+contratação do contrato discutido. A alegação pode ocorrer quando a parte afirma ter sido
+negativada por dívida que não reconhece ou quando sustenta ter sido vítima de golpe
+praticado por terceiros, não reconhecendo a contratação do empréstimo. A fraude pode
+envolver tanto empréstimo pessoal quanto empréstimo consignado.
+Como identificar: Para identificar corretamente qual tese de fraude deve ser utilizada, é
+indispensável analisar o meio pelo qual o contrato foi celebrado, principalmente por meio da
+trilha do contrato.
+
+15
+
+Modalidades: Fraude Refin Recorrente/Automático; Fraude Filial; Fraude Filial a Rogo;
+Fraude Whats; Fraude Web Banco/Pessoal; Fraude APP; Fraude Toscana até 23/08/2023; e
+Fraude Toscana após 23/08/2023.
+6.1 FRAUDE REFIN RECORRENTE/AUTOMÁTICO
+
+Explicação: O refinanciamento recorrente ou automático é um produto descontinuado da
+Crefisa, mas ainda existem ações judiciais em que contratos dessa modalidade são
+impugnados. Quando o cliente celebra o primeiro contrato de empréstimo com a Crefisa, ele
+assina também um termo de autorização de refinanciamento recorrente, autorizando que,
+assim que houver margem de crédito disponível, a Crefisa possa realizar automaticamente o
+refinanciamento do contrato, sem necessidade de nova autorização. Com o refinanciamento,
+o contrato originário é quitado e as parcelas são reiniciadas, mantendo-se o mesmo valor das
+parcelas.
+Providência a ser tomada: Solicitar o termo de adesão ao refin recorrente e verificar o
+aceite do cliente. Também abrir uma requisição de tentativa de acordo informando que o
+cliente não reconhece o contrato e aguardar o retorno do time interno da Crefisa para
+verificar se haverá liquidação do contrato.
+Pontos de atenção: Não tratar o refinanciamento recorrente como uma nova contratação
+completamente independente do contrato originário. Deve-se verificar a existência do termo
+de autorização previamente firmado pelo cliente e o respectivo aceite. Embora o produto
+esteja descontinuado, ainda existem demandas envolvendo operações realizadas por essa
+modalidade.
+6.2 FRAUDE FILIAL
+
+Explicação: Corresponde aos casos em que a contratação foi realizada presencialmente em
+uma agência da Crefisa.
+Providência a ser tomada: Analisar a documentação referente à contratação presencial,
+verificando os elementos que comprovem a realização do contrato na filial.
+Pontos de atenção: Confirmar que a contratação efetivamente ocorreu de forma presencial
+e analisar os documentos correspondentes à operação antes de indicar a tese.
+6.3 FRAUDE FILIAL A ROGO
+
+Explicação: Corresponde às contratações presenciais realizadas por clientes analfabetos.
+Nesses casos, a parte autora coloca sua digital no contrato, outra pessoa assina em seu nome
+e duas testemunhas também assinam o instrumento.
+Providência a ser tomada: Analisar o contrato e verificar a existência da digital da parte
+autora, da assinatura realizada por terceiro e das assinaturas das duas testemunhas. Solicitar
+os documentos de identificação das testemunhas que assinaram o contrato para juntada aos
+autos.
+
+16
+
+Pontos de atenção: A identificação e documentação das testemunhas são especialmente
+importantes nessa modalidade, pois elas integram o procedimento de formalização do
+contrato celebrado a rogo.
+6.4 FRAUDE WHATS
+
+Explicação: Corresponde aos casos em que a contratação do empréstimo foi realizada por
+meio do WhatsApp da Crefisa, podendo envolver empréstimo pessoal ou consignado.
+Providência a ser tomada: Solicitar a trilha da conversa realizada pelo WhatsApp e
+verificar se existe confirmação da contratação e se há selfie de confirmação, além dos demais
+elementos que demonstrem a realização da contratação.
+Pontos de atenção: Não basta identificar que o contrato foi realizado pelo WhatsApp. É
+necessário analisar a trilha da conversa e verificar se existem elementos que permitam
+confirmar a efetiva participação da parte autora na contratação.
+6.5 FRAUDE WEB BANCO/PESSOAL
+
+Explicação: Corresponde aos contratos realizados por meio do site da Crefisa. Após a
+contratação pelo site, a parte recebe SMS contendo um link para verificação digital, por meio
+do qual realiza uma selfie para confirmação da identidade.
+Providência a ser tomada: Analisar a trilha do contrato, verificando o procedimento de
+contratação realizado pelo site e, principalmente, a existência da confirmação digital e da
+selfie da parte autora.
+Pontos de atenção: Verificar se a selfie e os demais elementos constantes da trilha
+correspondem ao procedimento de confirmação utilizado nessa modalidade.
+6.6 FRAUDE APP
+
+Explicação: Corresponde aos casos em que o contrato foi celebrado por meio do aplicativo
+da Crefisa, mediante confirmação da contratação por selfie da parte autora.
+Providência a ser tomada: Analisar a trilha do contrato e verificar os elementos referentes
+à contratação realizada pelo aplicativo, especialmente a confirmação mediante selfie.
+Pontos de atenção: A análise deve se concentrar na comprovação do procedimento de
+contratação pelo aplicativo e na existência da confirmação por selfie.
+6.7 FRAUDE TOSCANA ATÉ 23/08/2023
+
+Explicação: Corresponde aos contratos cuja contratação e confirmação ocorreram por
+meio de ligação telefônica com atendente da Crefisa.
+Providência a ser tomada: Solicitar a gravação da ligação telefônica. Após disponibilizada a
+gravação, realizar a análise do conteúdo da conversa para verificar se houve efetivamente a
+contratação e se a pessoa que realizou a ligação confirmou a operação.
+
+17
+
+Pontos de atenção: É necessário ouvir a gravação e verificar se os elementos apresentados
+na conversa permitem confirmar a contratação alegada pela instituição.
+6.8 FRAUDE TOSCANA APÓS 23/08/2023
+
+Explicação: Após 23/08/2023, houve alteração no procedimento de contratação
+relacionado à modalidade Toscana. Nesses casos, não há mais a gravação da ligação
+telefônica como elemento de confirmação; o procedimento passou a envolver o envio de
+selfie da parte autora.
+Providência a ser tomada: Verificar primeiro a data de celebração do contrato. Se a
+contratação ocorreu após 23/08/2023, o modelo a ser indicado é Fraude Web
+Banco/Pessoal, devendo ser analisada a trilha da contratação e os elementos de confirmação
+por selfie.
+Pontos de atenção: A data da contratação é essencial para a correta classificação da fraude.
+Regra prática: Toscana até 23/08/2023 → solicitar gravação da ligação. Toscana após
+23/08/2023 → indicar Fraude Web Banco/Pessoal e analisar a confirmação por selfie.
+
+7. CANCELAMENTO DE CONTRATO
+Explicação: A parte autora reconhece que celebrou contrato com a Crefisa, porém sustenta
+que a contratação não ocorreu nos termos que imaginava ou que lhe foram apresentados. A
+controvérsia, portanto, não está necessariamente na existência do contrato, mas nas
+condições em que ele foi formalizado.
+Exemplos: A parte afirma que foi informado determinado valor de parcela, mas
+posteriormente verificou que o valor efetivamente contratado era diverso; sustenta que não
+recebeu explicação clara sobre taxas de juros; discorda da forma de pagamento; ou afirma
+acreditar ter celebrado empréstimo consignado, quando, na realidade, tratava-se de
+empréstimo pessoal.
+Providência a ser tomada: Verificar qual contrato foi efetivamente celebrado, quais foram
+as condições pactuadas, qual é a alegação específica da parte autora e se há documentos que
+demonstrem modalidade, valor, forma de pagamento e encargos. A defesa deve ser
+construída para demonstrar a regularidade da contratação e dos termos efetivamente
+formalizados.
+Pontos de atenção: Distinguir essa tese de fraude e de inexistência de contratação: aqui, a
+parte reconhece a contratação, mas discute os termos. Analisar contrato, demonstrativo de
+crédito, demonstrativo de débito, telas sistêmicas e demais documentos pertinentes.
+
+8. CANCELAMENTO DO DÉBITO AUTOMÁTICO
+Explicação: A parte autora reconhece que celebrou o contrato, mas sustenta que os
+descontos diretamente em sua conta comprometem sua sobrevivência ou consomem parcela
+
+18
+
+relevante de sua renda. Em alguns casos, afirma ter entrado em contato com a Crefisa e
+solicitado o cancelamento do débito e a disponibilização de boletos ou outro meio de
+pagamento. Em outros, ajuíza a ação diretamente, sem tentativa administrativa prévia, e
+pode pedir apenas o cancelamento do débito automático.
+Providência a ser tomada: Verificar qual contrato está em aberto e qual contrato está
+gerando os descontos; se houve deferimento de tutela de urgência para suspender os débitos
+em conta e disponibilizar boleto; e, havendo liminar, se existe formulário agendado para
+cumprimento. Se não houver tutela deferida, abrir requisição no ProJuris, na parte de
+tentativa de acordo, solicitando o cancelamento do débito automático e a disponibilização de
+boletos.
+Pontos de atenção: É importante aguardar o retorno do time da Crefisa sobre a
+disponibilização dos boletos, pois há casos em que eles não são disponibilizados. A defesa
+deve ser adequada ao retorno interno e à existência ou não de decisão liminar.
+Fluxo resumido: Com tutela deferida → conferir cumprimento/formulário agendado. Sem
+tutela deferida → abrir tentativa de acordo para cancelamento do débito automático e
+disponibilização de boletos → aguardar retorno interno.
+
+9. CHEQUE ESPECIAL
+Explicação: São ações em que a parte autora afirma estar sendo cobrada por juros e
+encargos decorrentes da utilização de cheque especial, mas não reconhece a contratação
+desse serviço.
+Providência a ser tomada: Abrir requisição no ProJuris, na parte de Dúvidas e
+Esclarecimentos, módulo Cheque Especial, solicitando o aceite do cheque especial. Também
+abrir requisição solicitando o extrato da conta bancária, para demonstrar a efetiva utilização
+do cheque especial.
+Pontos de atenção: A análise do extrato é fundamental para identificar a utilização do
+limite e a origem dos encargos. Demonstrada a efetiva utilização do cheque especial e a
+regularidade da contratação, a defesa deve sustentar que os juros e encargos cobrados são
+devidos.
+
+10. BANCO MERO PAGADOR
+Explicação: São ações em que a parte autora discute determinado contrato, mas esse
+contrato não foi celebrado com a Crefisa ou com o Banco Crefisa, embora a parte receba
+algum tipo de benefício por intermédio do Banco Crefisa. A tese sustenta que a única função
+do Banco Crefisa naquela relação é realizar o pagamento do benefício, não sendo o
+contratante do negócio discutido.
+
+19
+
+Providência a ser tomada: Juntar, conforme o caso, a tela NFC e demonstrativos de
+crédito. Se pertinente, juntar também o extrato da conta bancária. O objetivo é demonstrar
+que o Banco Crefisa atua apenas como instituição pagadora e não celebrou o contrato
+impugnado.
+Pontos de atenção: Essa tese é muito comum quando a parte autora impugna contrato de
+empréstimo consignado celebrado com outra instituição financeira. É indispensável conferir
+o contrato discutido e identificar quem efetivamente o celebrou.
+
+11. NÃO É CLIENTE
+Explicação: A parte autora pode ajuizar qualquer tipo de ação — revisional, fraude,
+desconto indevido, cancelamento, negativação ou outra — mas, na busca realizada no SAG,
+não é localizado qualquer contrato disponível em nome da parte. A defesa “não é cliente”
+demonstra que a parte autora não possui vínculo com a Crefisa.
+Providência a ser tomada: Realizar a busca da parte autora no SAG e verificar se existe
+algum contrato ativo, liquidado ou vinculado ao CPF informado. Se não houver qualquer
+contrato disponível, indicar a tese “não é cliente” e demonstrar a inexistência de vínculo
+contratual.
+Pontos de atenção: A tese só deve ser utilizada quando a consulta ao SAG realmente não
+localizar contrato em nome da parte autora. Não confundir “não é cliente” com discussão
+sobre validade, adimplemento ou irregularidade contratual. Se houver contrato, mesmo
+antigo ou liquidado, a defesa deve ser reavaliada conforme a natureza da ação.
+
+12. EXIBIÇÕES DE DOCUMENTOS
+Explicação: As ações de exibição são aquelas em que a parte autora utiliza o procedimento
+específico de produção antecipada de provas para requerer a apresentação de documentos.
+O pedido pode envolver contrato de empréstimo, extrato bancário, termo de abertura ou
+outros documentos relacionados à relação mantida com a instituição.
+Como identificar: É necessário identificar exatamente qual documento está sendo
+solicitado, pois o procedimento para apresentação varia conforme a natureza do documento
+e a situação do contrato.
+Tipos de exibição: Verificar se o pedido envolve contrato de empréstimo pessoal, contrato
+de empréstimo consignado, documentos bancários — como extrato bancário ou termo de
+abertura — ou pedido genérico de exibição de documentos.
+12.1 EMPRÉSTIMO PESSOAL
+
+Na exibição de contrato de empréstimo pessoal ou de empréstimo consignado, deve-se
+verificar se o contrato está ou não prescrito. Se o contrato não estiver prescrito, os
+documentos deverão ser apresentados independentemente da existência de pena de multa.
+
+20
+
+Se o contrato estiver prescrito, a apresentação somente deverá ocorrer se houver imposição
+de sanção.
+12.2 DOCUMENTOS DE BANCO/EMPRÉSTIMO CONSIGNADO
+
+Nas exibições que solicitam documentos bancários, como contrato de empréstimo
+consignado, extrato bancário, termo de abertura ou qualquer outro documento relacionado
+ao banco, os documentos deverão ser apresentados independentemente da existência de
+sanção.
+12.3 PEDIDOS GENÉRICOS
+
+Quando o pedido de exibição for formulado de maneira genérica, deve-se aguardar o
+recebimento da petição inicial e verificar se houve ou não imposição de sanção. A
+apresentação dos documentos deverá ser definida de acordo com o despacho proferido pelo
+juiz.
+Pontos de atenção: Antes de definir a documentação a ser apresentada, é indispensável
+conferir o objeto específico da exibição, a situação de prescrição do contrato, quando se
+tratar de empréstimo, e o conteúdo da decisão judicial. Nos pedidos genéricos, não se deve
+antecipar a apresentação dos documentos antes de verificar o despacho do juiz.
+
+13. CASOS EM QUE DEVEMOS SOLICITAR TENTATIVA DE ACORDO
+Explicação: A tentativa de acordo deve ser solicitada nas hipóteses em que o manual
+interno determina atuação prévia do time responsável para verificar a possibilidade de
+solução do caso.
+Casos indicados:
+• Cancelamento do débito automático;
+• Fraude Refin Recorrente;
+• Fraude Cliente Iletrado / Fraude Filial a Rogo;
+• Desconto indevido de contrato em aberto há mais de 5 anos;
+• Pasta envolvendo beneficiário que recebe pelo Banco Crefisa.
+Ponto de atenção: A abertura da requisição deve ser feita de acordo com a tese aplicável e,
+quando necessário, deve-se aguardar o retorno do time interno antes de finalizar a estratégia
+defensiva.
+
+14. FLUXO DE TRIAGEM / ÁRVORE DE DECISÃO
+Explicação: A análise inicial deve seguir uma ordem lógica para evitar enquadramento
+equivocado da tese e para facilitar a definição da estratégia defensiva.
+Fluxo resumido:
+
+21
+
+•
+
+1. Identificar o tipo de ação e o objeto principal da demanda.
+
+•
+2. Conferir qual empresa deve figurar no polo passivo e se há necessidade de
+retificação.
+•
+3. Verificar se existem preliminares gerais aplicáveis, como conexão, litispendência,
+coisa julgada, ilegitimidade ou prescrição.
+•
+4. Definir se a controvérsia está ligada à inexistência de contratação, às condições da
+contratação, à cobrança posterior, à negativação ou à exibição de documentos.
+•
+
+5. Enquadrar a tese principal conforme o fato central narrado na inicial.
+
+•
+6. Avaliar se há tese complementar ou subsidiária, sem perder a coerência da defesa
+principal.
+•
+7. Conferir a necessidade de juntada de contrato, trilha, extratos, demonstrativos,
+gravações ou telas sistêmicas.
+•
+
+8. Verificar se o caso exige tentativa de acordo antes da finalização da estratégia.
+
+•
+9. Checar se existe tutela de urgência, prazo judicial, multa ou determinação específica
+de cumprimento.
+•
+10. Consolidar a análise em forma de conclusão objetiva, indicando a tese principal,
+as teses acessórias e os documentos necessários.
+Regra prática: primeiro identificar o núcleo da controvérsia; depois conferir a preliminar
+aplicável; em seguida definir a tese principal; por fim, verificar documentos e providências
+internas.
+
+15. SITUAÇÕES DE CONFLITO ENTRE TESES
+Explicação: Em algumas demandas, mais de uma tese pode parecer aplicável ao mesmo
+tempo. Nesses casos, a análise deve priorizar a tese mais específica para o fato discutido e,
+quando houver preliminar extintiva ou de correção da parte, ela deve ser examinada antes
+das teses de mérito.
+Ordem sugerida de prioridade:
+•
+a) Preliminares extintivas ou de saneamento: coisa julgada, litispendência, conexão,
+ilegitimidade passiva, ilegitimidade ativa e retificação do polo passivo.
+•
+
+b) Prescrição e efeito sobre a produção documental.
+
+•
+
+c) Enquadramento da tese principal conforme o fato narrado na inicial.
+
+•
+
+d) Teses complementares ou subsidiárias.
+
+•
+e) Providências internas, como tentativa de acordo, juntada de documentos e
+verificação de tutela de urgência.
+
+22
+
+Conflitos mais comuns e critério de solução:
+• Fraude x cancelamento de contrato: se a parte afirma que não contratou ou não
+reconhece a contratação, a tese tende a ser fraude; se reconhece a contratação, mas discute
+as condições ou o modo como o contrato foi formalizado, a tese tende a ser cancelamento
+de contrato.
+• Fraude x revisional: se a controvérsia é a existência do contrato, aplica-se fraude; se a
+controvérsia é o conteúdo financeiro do contrato reconhecido, aplica-se revisional.
+• Revisional x desconto indevido: se a discussão é sobre cláusulas, juros, encargos ou
+onerosidade excessiva, a tese é revisional; se a discussão é sobre cobrança indevida, desconto
+em conta, desconto em benefício ou estorno, a tese deve ser enquadrada em desconto
+indevido. Lembrando que é possível que uma ação seja sobre revisional e desconto indevido
+ao mesmo tempo.
+• Serasa Limpa Nome x SCR x órgãos de proteção: as três hipóteses são distintas e não
+devem ser tratadas como sinônimas. Cada uma exige análise própria e documentação
+específica.
+• Banco mero pagador x retificação do polo passivo: primeiro deve-se identificar quem
+celebrou o contrato e qual empresa é efetivamente responsável pela relação discutida; se o
+Banco Crefisa apenas paga o benefício, a tese de banco mero pagador pode ser cumulada
+com a verificação da legitimidade passiva.
+• Conexão x litispendência x coisa julgada: se as ações possuem identidade relevante,
+mas ainda não há decisão final, pode haver conexão ou litispendência, conforme o caso; se já
+houve trânsito em julgado, a hipótese é coisa julgada.
+• Prescrição x exibição de documentos: antes de definir se o documento será
+apresentado, é indispensável verificar a modalidade da ação, a prescrição aplicável e eventual
+sanção fixada na decisão judicial.
+• Cancelamento do débito automático x desconto indevido: quando a pretensão é
+interromper o débito em conta, a tese é cancelamento do débito automático; quando a
+discussão é sobre cobrança já realizada em contrato em aberto, pode haver desconto
+indevido.
+Regra de fechamento: quando houver mais de uma tese aplicável, a defesa deve registrar a
+tese principal, indicar expressamente as teses subsidiárias e consignar a fundamentação de
+cada enquadramento. É possível a existência de mais de uma tese principal no mesmo caso,
+como, por exemplo, desconto indevido e negativação em órgãos de proteção, desde que as
+argumentações sejam compatíveis entre si e não se contradigam. Já teses com fundamentos
+incompatíveis, como revisional e fraude, não devem ser tratadas como principais
+simultaneamente; nessa hipótese, a defesa deve eleger a tese condizente com o núcleo fático
+da demanda e manter a tese conflitante, se cabível, apenas de forma subsidiária ou afastá-la.
