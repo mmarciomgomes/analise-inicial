@@ -116,6 +116,16 @@ function registerAnaliseRoutes(app, { getDb, baixarArquivo } = {}) {
   /* =========================================================
    * CAIXA DE E-MAIL DE SUBSÍDIOS (senha cifrada)
    * ========================================================= */
+  // devolve a caixa sem as senhas (só indica se existem), para a tela mostrar o que já está salvo
+  r.get('/caixa/:codigoEscritorio', wrap(async (req, res) => {
+    const db = await getDb();
+    const ce = await exigirHabilitado(db, req.params.codigoEscritorio);
+    const c = await db.collection('analiseCaixas').findOne({ codigoEscritorio: ce });
+    if (!c) return res.json({ ok: true, caixa: null });
+    const lado = (x, padrao) => ({ host: x?.host || '', port: x?.port || padrao, user: x?.user || '', temSenha: !!x?.pass, pasta: x?.pasta });
+    res.json({ ok: true, caixa: { de: c.de || '', ativo: c.ativo !== false, smtp: lado(c.smtp, 465), imap: lado(c.imap, 993), lastUid: c.lastUid || 0 } });
+  }));
+
   r.post('/caixa-salvar', wrap(async (req, res) => {
     const db = await getDb();
     const ce = await exigirHabilitado(db, req.body.codigoEscritorio);
