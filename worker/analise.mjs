@@ -6,13 +6,11 @@
 // Rotinas:
 //   - fila analiseJobs (lease + tentativas): ingestao → extracao → diligencias → triagem → subsidios → parecer → minuta
 //   - abertura automática: processos novos dos clientes com analiseConfig.ativo + modulos.abertura (a cada 5 min)
-//   - IMAP das caixas de subsídios (a cada 2 min)
-//   - lembretes de subsídios e escalonamento por prazo (a cada 60 min)
+//   - alertas de subsídios sem retorno e escalonamento por prazo (a cada 60 min)
 import 'dotenv/config';
 import os from 'node:os';
 import { MongoClient } from 'mongodb';
 import { E, carregarContexto, EtapaPulada } from './lib/contexto.mjs';
-import { lerCaixa } from './lib/imap.mjs';
 import * as ingestao from './stages/ingestao.mjs';
 import * as extracao from './stages/extracao.mjs';
 import * as diligencias from './stages/diligencias.mjs';
@@ -102,19 +100,6 @@ async function abrirNovos() {
   }
 }
 
-async function lerCaixas() {
-  const caixas = await db.collection('analiseCaixas').find({ ativo: { $ne: false }, 'imap.host': { $exists: true } }).toArray();
-  for (const c of caixas) {
-    const habil = await E.escritorioHabilitado(db, c.codigoEscritorio);
-    if (!habil) continue;
-    try {
-      await lerCaixa(db, { ...c, imap: { ...c.imap, pass: E.decifrar(c.imap.pass) } }, log);
-    } catch (e) {
-      log(`IMAP erro (${c.imap?.user}):`, e.message);
-    }
-  }
-}
-
 function agendar(nome, fn, ms) {
   let rodando = false;
   const tick = async () => {
@@ -128,7 +113,6 @@ function agendar(nome, fn, ms) {
 
 if (TESTE) {
   await abrirNovos();
-  await lerCaixas();
   await loopFila();
   await subsidios.lembretes(db, log);
   await client.close();
@@ -136,7 +120,6 @@ if (TESTE) {
   process.exit(0);
 } else {
   agendar('abertura', abrirNovos, 5 * 60 * 1000);
-  agendar('imap', lerCaixas, 2 * 60 * 1000);
   agendar('lembretes', () => subsidios.lembretes(db, log), 60 * 60 * 1000);
   loopFila();
   const sair = async () => { log('encerrando'); await client.close().catch(() => {}); process.exit(0); };

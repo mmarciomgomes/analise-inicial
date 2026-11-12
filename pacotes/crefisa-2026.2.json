@@ -1638,18 +1638,18 @@
     "desconto.estorno",
     "beneficiario_banco"
   ],
-  "emails": {
+  "pedidos": {
     "subsidio": {
-      "assunto": "[{{codigo}}] Subsídios — {{numeroProcesso}} — {{autor}}",
-      "corpo": "Prezados,\n\nSolicitamos os subsídios abaixo para a defesa no processo {{numeroProcesso}} ({{orgao}}).\n\nParte autora: {{autor}} — CPF {{cpf}}\nContratos citados na inicial: {{contratos}}\nTese(s) identificada(s): {{teses}}\nPrazo para contestação: {{prazo}}\n\nDocumentos:\n{{#itens}}- {{item}}\n{{/itens}}\nPor favor, responda a este e-mail mantendo o código {{codigo}} no assunto, com os documentos em anexo.\n\nAtenciosamente,\n{{escritorio}}"
+      "assunto": "Subsídios — {{#pasta}}Pasta {{pasta}} — {{/pasta}}{{numeroProcesso}} — {{autor}}",
+      "corpo": "Prezados,\n\nSolicitamos os subsídios abaixo para a defesa no processo {{numeroProcesso}}{{#pasta}} (Pasta {{pasta}}){{/pasta}} ({{orgao}}).\n\nParte autora: {{autor}} — CPF {{cpf}}\nContratos citados na inicial: {{contratos}}\nTese(s) identificada(s): {{teses}}\nPrazo para contestação: {{prazo}}\n\nDocumentos:\n{{#itens}}- {{item}}\n{{/itens}}\nPor favor, anexe os documentos no retorno deste pedido.\n\nAtenciosamente,\n{{escritorio}}"
     },
     "acordo": {
-      "assunto": "[{{codigo}}] Tentativa de acordo — {{numeroProcesso}} — {{autor}}",
-      "corpo": "Prezados,\n\nPara o processo {{numeroProcesso}}, o manual prevê atuação prévia do time de acordos:\n\n{{#motivos}}- {{motivo}}\n{{/motivos}}\nParte autora: {{autor}} — CPF {{cpf}}\nPrazo para contestação: {{prazo}}\n\nAguardamos o retorno para finalizar a estratégia de defesa. Mantenha o código {{codigo}} no assunto.\n\nAtenciosamente,\n{{escritorio}}"
+      "assunto": "Tentativa de acordo — {{#pasta}}Pasta {{pasta}} — {{/pasta}}{{numeroProcesso}} — {{autor}}",
+      "corpo": "Prezados,\n\nPara o processo {{numeroProcesso}}{{#pasta}} (Pasta {{pasta}}){{/pasta}}, o manual prevê atuação prévia do time de acordos:\n\n{{#motivos}}- {{motivo}}\n{{/motivos}}\nParte autora: {{autor}} — CPF {{cpf}}\nPrazo para contestação: {{prazo}}\n\nAguardamos o retorno para finalizar a estratégia de defesa.\n\nAtenciosamente,\n{{escritorio}}"
     },
     "complemento": {
-      "assunto": "[{{codigo}}] Complemento de subsídios — {{numeroProcesso}}",
-      "corpo": "Prezados,\n\nRecebemos parte dos subsídios do processo {{numeroProcesso}}. Ainda faltam:\n\n{{#itens}}- {{item}}\n{{/itens}}\nMantenha o código {{codigo}} no assunto.\n\nAtenciosamente,\n{{escritorio}}"
+      "assunto": "Complemento de subsídios — {{#pasta}}Pasta {{pasta}} — {{/pasta}}{{numeroProcesso}}",
+      "corpo": "Prezados,\n\nRecebemos parte dos subsídios do processo {{numeroProcesso}}{{#pasta}} (Pasta {{pasta}}){{/pasta}}. Ainda faltam:\n\n{{#itens}}- {{item}}\n{{/itens}}\nAtenciosamente,\n{{escritorio}}"
     }
   },
   "blocos": {

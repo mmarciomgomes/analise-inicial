@@ -31,7 +31,8 @@ export async function classificarDocumentos(ctx, textos) {
 export async function executar(ctx) {
   const { db, processo, config } = ctx;
   await ctx.estado(E.ESTADOS.INGESTAO);
-  const docs = await documentosDoProcesso(db, processo._id);
+  const sel = await db.collection('analiseInicial').findOne({ idProcesso: processo._id }, { projection: { documentosSelecionados: 1 } });
+  const docs = await documentosDoProcesso(db, processo._id, { ids: sel?.documentosSelecionados });
   if (!docs.length) throw new Error('Processo sem documentos anexados (suba a inicial com documentos).');
 
   const textos = [];

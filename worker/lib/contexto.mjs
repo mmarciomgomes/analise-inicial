@@ -10,6 +10,7 @@ const require = createRequire(import.meta.url);
 export const E = require('../../shared/esteira.js');
 export const U = require('../../shared/util.js');
 export const D = require('../../shared/decisao.js');
+const { motivoExclusao } = require('../../shared/documentos.js');
 export const R = require('../../shared/regras.js');
 export const CONF = require('../../shared/conferencia.js');
 
@@ -72,11 +73,16 @@ export async function textoDoDocumento(db, doc, { maxPaginas = 400 } = {}) {
   return { docId: String(docId), hash, paginas, meta };
 }
 
-export async function documentosDoProcesso(db, idProcesso, { origem } = {}) {
+export async function documentosDoProcesso(db, idProcesso, { origem, ids } = {}) {
   const q = { idProcesso };
   if (origem === 'subsidio') q.origem = 'subsidio';
   else q.origem = { $nin: ['subsidio', 'analise-minuta'] };
-  return db.collection('documentosAnexados').find(q).sort({ cadastradoEm: 1 }).toArray();
+  const todos = await db.collection('documentosAnexados').find(q).sort({ cadastradoEm: 1 }).toArray();
+  if (origem === 'subsidio') return todos;
+  // leitura da inicial: usa a seleção feita na tela; sem seleção, tira o que é claramente do próprio escritório (contestação, formulários, recibos...)
+  if (ids?.length) { const set = new Set(ids.map(String)); return todos.filter((d) => set.has(String(d._id))); }
+  const uteis = todos.filter((d) => !motivoExclusao(d));
+  return uteis.length ? uteis : todos;
 }
 
 // páginas de um segmento (peça) já classificado

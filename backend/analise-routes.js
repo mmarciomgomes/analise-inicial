@@ -15,6 +15,7 @@ const crypto = require('node:crypto');
 const express = require('express');
 const E = require('../shared/esteira');
 const U = require('../shared/util');
+const { motivoExclusao } = require('../shared/documentos');
 
 const { oid } = E;
 
@@ -114,38 +115,6 @@ function registerAnaliseRoutes(app, { getDb, baixarArquivo } = {}) {
   }));
 
   /* =========================================================
-   * CAIXA DE E-MAIL DE SUBSÍDIOS (senha cifrada)
-   * ========================================================= */
-  // devolve a caixa sem as senhas (só indica se existem), para a tela mostrar o que já está salvo
-  r.get('/caixa/:codigoEscritorio', wrap(async (req, res) => {
-    const db = await getDb();
-    const ce = await exigirHabilitado(db, req.params.codigoEscritorio);
-    const c = await db.collection('analiseCaixas').findOne({ codigoEscritorio: ce });
-    if (!c) return res.json({ ok: true, caixa: null });
-    const lado = (x, padrao) => ({ host: x?.host || '', port: x?.port || padrao, user: x?.user || '', temSenha: !!x?.pass, pasta: x?.pasta });
-    res.json({ ok: true, caixa: { de: c.de || '', ativo: c.ativo !== false, smtp: lado(c.smtp, 465), imap: lado(c.imap, 993), lastUid: c.lastUid || 0 } });
-  }));
-
-  r.post('/caixa-salvar', wrap(async (req, res) => {
-    const db = await getDb();
-    const ce = await exigirHabilitado(db, req.body.codigoEscritorio);
-    const b = req.body.caixa || {};
-    const atual = await db.collection('analiseCaixas').findOne({ codigoEscritorio: ce });
-    const sec = (novo, velho) => (novo ? E.cifrar(novo) : velho || null);
-    const doc = {
-      codigoEscritorio: ce,
-      nome: b.nome || 'Subsídios',
-      de: b.de,
-      ativo: b.ativo !== false,
-      smtp: { host: b.smtp?.host, port: Number(b.smtp?.port || 465), secure: b.smtp?.secure !== false, user: b.smtp?.user, pass: sec(b.smtp?.pass, atual?.smtp?.pass) },
-      imap: { host: b.imap?.host, port: Number(b.imap?.port || 993), secure: b.imap?.secure !== false, user: b.imap?.user, pass: sec(b.imap?.pass, atual?.imap?.pass), pasta: b.imap?.pasta || 'INBOX' },
-      atualizadoEm: new Date(),
-    };
-    await db.collection('analiseCaixas').updateOne({ codigoEscritorio: ce }, { $set: doc }, { upsert: true });
-    res.json({ ok: true });
-  }));
-
-  /* =========================================================
    * PROCESSO
    * ========================================================= */
   r.get('/processo/:codigoEscritorio/:idProcesso', wrap(async (req, res) => {
@@ -157,7 +126,25 @@ function registerAnaliseRoutes(app, { getDb, baixarArquivo } = {}) {
     const jobs = await db.collection('analiseJobs').find({ idProcesso: proc._id }).sort({ createdAt: -1 }).limit(15)
       .project({ etapa: 1, status: 1, attempts: 1, lastError: 1, createdAt: 1, finishedAt: 1 }).toArray();
     const solicitacoes = await db.collection('subsidiosSolicitacoes').find({ idProcesso: proc._id }).sort({ criadoEm: -1 }).toArray();
-    res.json({ ok: true, habilitadoCliente: habilitado, config, analise, jobs, solicitacoes });
+    res.json({ ok: true, habilitadoCliente: habilitado, config, analise, jobs, solicitacoes, processo: { numero: proc.numeroProcessoFull || proc.numeroProcesso || null, pasta: proc.novaPasta || null } });
+  }));
+
+  // documentos do processo para escolher o que a análise lê (a inicial e seus anexos; o resto vem desmarcado)
+  r.get('/documentos/:codigoEscritorio/:idProcesso', wrap(async (req, res) => {
+    const db = await getDb();
+    const ce = await exigirHabilitado(db, req.params.codigoEscritorio);
+    const proc = await processoDoEscritorio(db, ce, req.params.idProcesso);
+    const docs = await db.collection('documentosAnexados').find({ idProcesso: proc._id, origem: { $nin: ['subsidio', 'analise-minuta'] } }).sort({ cadastradoEm: 1 }).toArray();
+    const atual = await db.collection('analiseInicial').findOne({ idProcesso: proc._id }, { projection: { documentosSelecionados: 1 } });
+    const sel = atual?.documentosSelecionados ? new Set(atual.documentosSelecionados.map(String)) : null;
+    res.json({
+      ok: true,
+      selecaoAnterior: !!sel,
+      documentos: docs.map((d) => {
+        const motivo = motivoExclusao(d);
+        return { id: String(d._id), nome: d.originalName, pasta: (d.folderPathSegments || []).join(' / '), tamanho: d.size || null, mimeType: d.mimeType || null, cadastradoEm: d.cadastradoEm || null, marcado: sel ? sel.has(String(d._id)) : !motivo, motivoExclusao: motivo };
+      }),
+    });
   }));
 
   r.post('/iniciar', wrap(async (req, res) => {
@@ -167,11 +154,22 @@ function registerAnaliseRoutes(app, { getDb, baixarArquivo } = {}) {
     const { habilitado } = await E.configDoProcesso(db, proc);
     if (!habilitado) throw erro(403, 'Análise não está ativa para o cliente deste processo.');
     const etapa = req.body.etapa || 'ingestao';
+    let idsSelecionados = null;
+    if (Array.isArray(req.body.docIds)) {
+      const ids = req.body.docIds.map(oid).filter(Boolean);
+      if (!ids.length) throw erro(400, 'Selecione ao menos um documento.');
+      const validos = await db.collection('documentosAnexados').find({ _id: { $in: ids }, idProcesso: proc._id }, { projection: { _id: 1 } }).toArray();
+      if (validos.length !== ids.length) throw erro(400, 'Há documentos que não pertencem a este processo.');
+      idsSelecionados = ids;
+    }
     await db.collection('analiseInicial').updateOne(
       { idProcesso: proc._id },
       { $setOnInsert: { idProcesso: proc._id, codigoEscritorio: ce, criadoEm: new Date(), estado: E.ESTADOS.NA_FILA, historico: [] } },
       { upsert: true },
     );
+    if (idsSelecionados) {
+      await db.collection('analiseInicial').updateOne({ idProcesso: proc._id }, { $set: { documentosSelecionados: idsSelecionados, documentosSelecionadosEm: new Date(), documentosSelecionadosPor: oid(req.body.userId) } });
+    }
     const r1 = await E.enfileirar(db, { codigoEscritorio: ce, idProcesso: proc._id, etapa, criadoPor: req.body.userId, prioridade: 3, payload: { manual: true } });
     await E.setEstado(db, proc._id, E.ESTADOS.NA_FILA, { iniciadoPor: oid(req.body.userId) });
     res.json({ ok: true, ...r1 });
@@ -216,26 +214,42 @@ function registerAnaliseRoutes(app, { getDb, baixarArquivo } = {}) {
     res.json({ ok: true, ...r1 });
   }));
 
-  // envia (ou reenvia) o e-mail de subsídios/acordo a partir do rascunho editado na tela
-  r.post('/subsidios-enviar', wrap(async (req, res) => {
+  // o advogado subiu o pedido no sistema do cliente (Crefisa): registra o envio e passa a aguardar o retorno
+  r.post('/subsidios-enviado', wrap(async (req, res) => {
     const db = await getDb();
     const ce = await exigirHabilitado(db, req.body.codigoEscritorio);
     const proc = await processoDoEscritorio(db, ce, req.body.idProcesso);
     const sol = await db.collection('subsidiosSolicitacoes').findOne({ _id: oid(req.body.solicitacaoId), idProcesso: proc._id });
     if (!sol) throw erro(404, 'Solicitação não encontrada');
-    if (sol.status === 'enviado' && !req.body.reenviar) throw erro(409, 'Já enviado.');
-    const caixa = await E.carregarCaixa(db, ce);
-    const para = (req.body.para || sol.para || []).filter(Boolean);
-    if (!para.length) throw erro(400, 'Informe ao menos um destinatário.');
-    const assunto = req.body.assunto || sol.assunto;
-    if (!assunto.includes(sol.codigo)) throw erro(400, `O assunto precisa manter o código ${sol.codigo}.`);
-    const envio = await E.enviarEmail(caixa, { para, cc: req.body.cc || sol.cc || [], assunto, corpo: req.body.corpo || sol.corpo });
+    if (sol.status !== 'a_enviar' && sol.status !== 'rascunho') throw erro(409, 'Este pedido já foi registrado como enviado.');
+    const agora = new Date();
+    const referencia = String(req.body.referencia || '').trim().slice(0, 200) || null;
     await db.collection('subsidiosSolicitacoes').updateOne({ _id: sol._id }, {
-      $set: { status: 'enviado', para, cc: req.body.cc || sol.cc || [], assunto, corpo: req.body.corpo || sol.corpo, messageId: envio.messageId, enviadoEm: new Date(), enviadoPor: oid(req.body.userId) },
-      $push: { eventos: { tipo: 'envio', em: new Date(), por: oid(req.body.userId), aceitos: envio.aceitos } },
+      $set: { status: 'enviado', enviadoEm: agora, enviadoPor: oid(req.body.userId), referenciaSistemaCliente: referencia, ...(req.body.corpo ? { corpo: String(req.body.corpo) } : {}) },
+      $push: { eventos: { tipo: 'envio_manual', em: agora, por: oid(req.body.userId), referencia } },
     });
     await E.setEstado(db, proc._id, E.ESTADOS.AGUARDANDO_SUBSIDIOS);
-    res.json({ ok: true, messageId: envio.messageId });
+    res.json({ ok: true });
+  }));
+
+  // o cliente respondeu no sistema dele: o advogado baixou os arquivos e os subiu em Documentos do processo
+  // (documentos-anexados-insere); aqui eles são ligados ao pedido e a esteira lê o que chegou (checklist).
+  r.post('/subsidios-receber', wrap(async (req, res) => {
+    const db = await getDb();
+    const ce = await exigirHabilitado(db, req.body.codigoEscritorio);
+    const proc = await processoDoEscritorio(db, ce, req.body.idProcesso);
+    const sol = await db.collection('subsidiosSolicitacoes').findOne({ _id: oid(req.body.solicitacaoId), idProcesso: proc._id });
+    if (!sol) throw erro(404, 'Solicitação não encontrada');
+    if (sol.status === 'a_enviar' || sol.status === 'rascunho') throw erro(409, 'Registre primeiro que o pedido foi enviado ao cliente.');
+    const ids = (Array.isArray(req.body.docIds) ? req.body.docIds : []).map(oid).filter(Boolean);
+    if (!ids.length) throw erro(400, 'Envie ao menos um arquivo.');
+    const validos = await db.collection('documentosAnexados').find({ _id: { $in: ids }, idProcesso: proc._id }, { projection: { _id: 1 } }).toArray();
+    if (validos.length !== ids.length) throw erro(400, 'Há documentos que não pertencem a este processo.');
+    const agora = new Date();
+    await db.collection('documentosAnexados').updateMany({ _id: { $in: ids } }, { $set: { origem: 'subsidio', subsidioSolicitacaoId: sol._id, subsidioRecebidoEm: agora } });
+    await db.collection('subsidiosSolicitacoes').updateOne({ _id: sol._id }, { $push: { eventos: { tipo: 'retorno', em: agora, por: oid(req.body.userId), anexos: ids.length } } });
+    const r1 = await E.enfileirar(db, { codigoEscritorio: ce, idProcesso: proc._id, etapa: 'subsidios', prioridade: 2, criadoPor: req.body.userId, payload: { acao: 'recebido', solicitacaoId: String(sol._id), docIds: ids.map(String) }, chave: `subsidios:recebido:${sol._id}:${ids.map(String).sort().join(',').slice(0, 200)}` });
+    res.json({ ok: true, ...r1 });
   }));
 
   // marca manualmente item do checklist como recebido / pendente

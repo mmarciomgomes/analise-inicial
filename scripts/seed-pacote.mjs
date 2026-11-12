@@ -61,6 +61,5 @@ if (escritorio) {
     );
     console.log(`análise ligada: escritório ${escritorio}, cliente ${c}, modo ${modo}`);
   }
-  console.log('Falta: destinatários (tela de configuração) e caixa de e-mail (POST /analise/caixa-salvar).');
 }
 await client.close();

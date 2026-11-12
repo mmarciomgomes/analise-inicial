@@ -30,11 +30,6 @@ const CONFIG_DEFAULT = {
   modulos: Object.fromEntries(MODULOS.map((m) => [m, false])),
   pacoteChave: null,
   ativoDesde: null,                // só processos cadastrados a partir desta data entram sozinhos
-  destinatarios: {                 // listas por tipo de pedido
-    subsidio: { para: [], cc: [] },
-    acordo: { para: [], cc: [] },
-    complemento: { para: [], cc: [] },
-  },
   score: null,                     // null = SCORE_DEFAULT (shared/util.js)
   revisao: { modo: 'assistido', confiancaMinima: 0.85 }, // sombra | assistido | automatico
   limites: { llmUsdMes: null, paginasPorDocumento: 400 },
@@ -55,7 +50,6 @@ function mergeConfig(doc) {
     ...CONFIG_DEFAULT,
     ...d,
     modulos: { ...CONFIG_DEFAULT.modulos, ...(d.modulos || {}) },
-    destinatarios: { ...CONFIG_DEFAULT.destinatarios, ...(d.destinatarios || {}) },
     revisao: { ...CONFIG_DEFAULT.revisao, ...(d.revisao || {}) },
     limites: { ...CONFIG_DEFAULT.limites, ...(d.limites || {}) },
   };
@@ -238,40 +232,9 @@ function decifrar(valor) {
   return Buffer.concat([d.update(Buffer.from(enc, 'base64')), d.final()]).toString('utf8');
 }
 
-// caixa de e-mail do escritório para subsídios: coleção analiseCaixas
-// { codigoEscritorio, nome, de, smtp:{host,port,secure,user,pass(cifrada)}, imap:{host,port,secure,user,pass(cifrada)}, ativo }
-async function carregarCaixa(db, codigoEscritorio) {
-  const c = await db.collection('analiseCaixas').findOne({ codigoEscritorio: oid(codigoEscritorio), ativo: { $ne: false } });
-  if (!c) return null;
-  return {
-    ...c,
-    smtp: c.smtp ? { ...c.smtp, pass: decifrar(c.smtp.pass) } : null,
-    imap: c.imap ? { ...c.imap, pass: decifrar(c.imap.pass) } : null,
-  };
-}
-
-async function enviarEmail(caixa, { para, cc, assunto, corpo, anexos = [], inReplyTo = null }) {
-  const nodemailer = require('nodemailer');
-  if (!caixa?.smtp?.host) throw new Error('Caixa de e-mail de subsídios não configurada (analiseCaixas).');
-  const t = nodemailer.createTransport({
-    host: caixa.smtp.host, port: Number(caixa.smtp.port || 465), secure: caixa.smtp.secure !== false,
-    auth: { user: caixa.smtp.user, pass: caixa.smtp.pass },
-  });
-  const info = await t.sendMail({
-    from: caixa.de || caixa.smtp.user,
-    to: (para || []).join(', '),
-    cc: (cc || []).length ? cc.join(', ') : undefined,
-    subject: assunto,
-    text: corpo,
-    inReplyTo: inReplyTo || undefined,
-    attachments: anexos,
-  });
-  return { messageId: info.messageId, aceitos: info.accepted, rejeitados: info.rejected };
-}
-
 module.exports = {
   ETAPAS, ESTADOS, MODULOS, CONFIG_DEFAULT, oid, mergeConfig,
   escritorioHabilitado, conferenciaHabilitada, carregarConfig, configDoProcesso, moduloLigado, carregarPacote,
   enfileirar, pegarJob, concluirJob, falharJob, setEstado, garantirIndices,
-  cifrar, decifrar, carregarCaixa, enviarEmail,
+  cifrar, decifrar,
 };

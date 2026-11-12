@@ -1,4 +1,5 @@
-// Etapa 6 — subsídios: rascunho/envio dos e-mails, leitura do que chegou (checklist) e lembretes.
+// Etapa 6 — subsídios: monta o pedido (texto + checklist) que o advogado sobe no sistema do cliente, lê o que o cliente
+// devolveu (arquivos anexados manualmente ao processo) e avisa quando o retorno demora. Não há e-mail.
 import { chamarEstruturado } from '../lib/llm.mjs';
 import { schemaChecklist } from '../lib/schemas.mjs';
 import { E, U, D, textoDoDocumento, nomeEscritorio } from '../lib/contexto.mjs';
@@ -21,13 +22,13 @@ async function prazoContestacao(db, processo) {
   return d ? new Date(d) : null;
 }
 
-function dadosModelo(ctx, codigo, extra = {}) {
+function dadosModelo(ctx, extra = {}) {
   const { processo, analise, escritorio } = ctx;
   const f = analise.ficha || {};
   const dec = analise.triagem?.aprovada || {};
   return {
-    codigo,
     numeroProcesso: processo.numeroProcessoFull || processo.numeroProcesso,
+    pasta: processo.novaPasta || '',
     orgao: v(f?.processo?.juizo) || processo.comarca || '',
     autor: v(f?.autor?.nome) || processo.ativo?.nome || '',
     cpf: U.formatarCpf(v(f?.autor?.cpf) || U.cpfDoTexto(processo.extraFields?.documentoOutraParte) || ''),
@@ -39,32 +40,19 @@ function dadosModelo(ctx, codigo, extra = {}) {
 }
 
 async function criarSolicitacao(ctx, tipo, itens, extra = {}) {
-  const { db, processo, config, pacote } = ctx;
-  const modelo = pacote.emails?.[tipo];
-  if (!modelo) throw new Error(`Modelo de e-mail "${tipo}" não existe no pacote.`);
-  const codigo = `GJ-SUB-${U.tokenAleatorio(5)}`;
+  const { db, processo, pacote } = ctx;
+  const modelo = (pacote.pedidos || pacote.emails)?.[tipo];
+  if (!modelo) throw new Error(`Modelo de pedido "${tipo}" não existe no pacote.`);
   const prazo = await prazoContestacao(db, processo);
-  const dados = dadosModelo(ctx, codigo, { itens: itens.map((i) => ({ item: i })), prazo: prazo ? prazo.toLocaleDateString('pt-BR') : 'a confirmar', ...extra });
-  const dest = config.destinatarios?.[tipo] || { para: [], cc: [] };
+  const dados = dadosModelo(ctx, { itens: itens.map((i) => ({ item: i })), prazo: prazo ? prazo.toLocaleDateString('pt-BR') : 'a confirmar', ...extra });
   const doc = {
-    codigo, tipo, codigoEscritorio: processo.codigoEscritorio, idProcesso: processo._id,
-    para: dest.para || [], cc: dest.cc || [],
+    tipo, codigoEscritorio: processo.codigoEscritorio, idProcesso: processo._id,
     assunto: U.renderTemplate(modelo.assunto, dados), corpo: U.renderTemplate(modelo.corpo, dados),
-    itens: itens.map((i) => ({ item: i, recebido: false, docs: [] })), status: 'rascunho', prazoContestacao: prazo,
+    itens: itens.map((i) => ({ item: i, recebido: false, docs: [] })), status: 'a_enviar', prazoContestacao: prazo,
     lembretes: 0, eventos: [{ tipo: 'criado', em: new Date() }], criadoEm: new Date(),
   };
   await db.collection('subsidiosSolicitacoes').insertOne(doc);
   return doc;
-}
-
-async function enviar(ctx, sol) {
-  const { db, processo } = ctx;
-  if (!sol.para?.length) return false;
-  const caixa = await E.carregarCaixa(db, processo.codigoEscritorio);
-  if (!caixa) return false;
-  const envio = await E.enviarEmail(caixa, { para: sol.para, cc: sol.cc, assunto: sol.assunto, corpo: sol.corpo });
-  await db.collection('subsidiosSolicitacoes').updateOne({ _id: sol._id }, { $set: { status: 'enviado', messageId: envio.messageId, enviadoEm: new Date(), enviadoPor: null }, $push: { eventos: { tipo: 'envio_automatico', em: new Date() } } });
-  return true;
 }
 
 async function rascunho(ctx) {
@@ -77,13 +65,11 @@ async function rascunho(ctx) {
   if ((dec.acordo || []).length) {
     criadas.push(await criarSolicitacao(ctx, 'acordo', [], { motivos: dec.acordo.map((a) => ({ motivo: a.motivo })) }));
   }
-  let enviadas = 0;
-  if (ctx.job.payload?.autoEnviar) for (const s of criadas) if (await enviar(ctx, s)) enviadas++;
-  await ctx.estado(enviadas === criadas.length && enviadas ? E.ESTADOS.AGUARDANDO_SUBSIDIOS : E.ESTADOS.SUBSIDIOS_RASCUNHO);
-  return { solicitacoes: criadas.length, enviadas };
+  await ctx.estado(E.ESTADOS.SUBSIDIOS_RASCUNHO);
+  return { solicitacoes: criadas.length };
 }
 
-// chegou e-mail com anexos: lê, marca checklist; tudo recebido => parecer
+// o advogado anexou o que o cliente devolveu: lê, marca o checklist; tudo recebido => parecer
 async function recebido(ctx) {
   const { db, processo, pacote } = ctx;
   const sol = await db.collection('subsidiosSolicitacoes').findOne({ _id: E.oid(ctx.job.payload.solicitacaoId) });
@@ -133,31 +119,25 @@ export async function executar(ctx) {
   throw new Error(`Ação desconhecida: ${acao}`);
 }
 
-// rotina periódica: lembretes D+2/D+4 e escalonamento perto do prazo
+// rotina periódica: avisa na tela quando o retorno do cliente demora (D+2/D+4) e perto do prazo de contestação
 export async function lembretes(db, log) {
   const abertas = await db.collection('subsidiosSolicitacoes').find({ status: { $in: ['enviado', 'parcial'] }, tipo: { $in: ['subsidio', 'complemento'] } }).limit(500).toArray();
   for (const s of abertas) {
     try {
-      const proc = await db.collection('processos').findOne({ _id: s.idProcesso }, { projection: { codigoEscritorio: 1, idCliente: 1, clienteId: 1, numeroProcesso: 1, numeroProcessoFull: 1 } });
+      const proc = await db.collection('processos').findOne({ _id: s.idProcesso }, { projection: { codigoEscritorio: 1, idCliente: 1, clienteId: 1, numeroProcesso: 1, numeroProcessoFull: 1, novaPasta: 1 } });
       if (!proc) continue;
       const { habilitado, config } = await E.configDoProcesso(db, proc);
       if (!habilitado) continue;
+      const ref = `${proc.novaPasta ? `Pasta ${proc.novaPasta} — ` : ''}${proc.numeroProcessoFull || proc.numeroProcesso}`;
       const dias = (Date.now() - +new Date(s.enviadoEm || s.criadoEm)) / 864e5;
       const marcos = config.prazoCobrancaDias || [2, 4];
       if (s.lembretes < marcos.length && dias >= marcos[s.lembretes]) {
-        const caixa = await E.carregarCaixa(db, proc.codigoEscritorio);
         const faltam = s.faltam?.length ? s.faltam : (s.itens || []).filter((i) => !i.recebido).map((i) => i.item);
-        if (caixa && s.para?.length) {
-          await E.enviarEmail(caixa, {
-            para: s.para, cc: s.cc, inReplyTo: s.messageId,
-            assunto: `Lembrete: ${s.assunto}`,
-            corpo: `Prezados,\n\nReforçamos o pedido do processo ${proc.numeroProcessoFull || proc.numeroProcesso}. Ainda pendente(s):\n${faltam.map((f) => `- ${f}`).join('\n')}\n\nMantenha o código ${s.codigo} no assunto.\n`,
-          });
-          await db.collection('subsidiosSolicitacoes').updateOne({ _id: s._id }, { $inc: { lembretes: 1 }, $push: { eventos: { tipo: 'lembrete', em: new Date() } } });
-        }
+        await db.collection('analiseAlertas').insertOne({ codigoEscritorio: proc.codigoEscritorio, idProcesso: s.idProcesso, tipo: 'subsidio_sem_retorno', texto: `Sem retorno do cliente há ${Math.floor(dias)} dia(s) (${ref}). Consulte o sistema do cliente. Pendente(s): ${faltam.join('; ')}.`, criadoEm: new Date(), lido: false });
+        await db.collection('subsidiosSolicitacoes').updateOne({ _id: s._id }, { $inc: { lembretes: 1 }, $push: { eventos: { tipo: 'lembrete', em: new Date() } } });
       }
       if (s.prazoContestacao && (+new Date(s.prazoContestacao) - Date.now()) / 864e5 <= 5 && !s.escalado) {
-        await db.collection('analiseAlertas').insertOne({ codigoEscritorio: proc.codigoEscritorio, idProcesso: s.idProcesso, tipo: 'subsidio_prazo', texto: `Subsídios pendentes e prazo de contestação em ${new Date(s.prazoContestacao).toLocaleDateString('pt-BR')} (${proc.numeroProcessoFull || proc.numeroProcesso}).`, criadoEm: new Date(), lido: false });
+        await db.collection('analiseAlertas').insertOne({ codigoEscritorio: proc.codigoEscritorio, idProcesso: s.idProcesso, tipo: 'subsidio_prazo', texto: `Subsídios pendentes e prazo de contestação em ${new Date(s.prazoContestacao).toLocaleDateString('pt-BR')} (${ref}).`, criadoEm: new Date(), lido: false });
         await db.collection('subsidiosSolicitacoes').updateOne({ _id: s._id }, { $set: { escalado: true } });
       }
     } catch (e) {

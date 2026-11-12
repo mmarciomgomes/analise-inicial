@@ -9,7 +9,7 @@ Tudo é desligado por padrão e ligado por escritório e por cliente.
 
 ```
 cadastro → ingestão/OCR → ficha da inicial → diligências (base interna, comprovante, DJEN, jus.br)
-→ triagem (LLM + regras do manual) → [advogado aprova] → e-mail de subsídios → IMAP lê a resposta
+→ triagem (LLM + regras do manual) → [advogado aprova] → pedido de subsídios (o advogado sobe no sistema do cliente) → [advogado anexa o retorno] → lê o checklist
 → parecer (SAG, trilha, prescrição, Toscana, estorno) → [advogado aprova] → minuta DOCX
 ```
 
@@ -18,16 +18,16 @@ cadastro → ingestão/OCR → ficha da inicial → diligências (base interna, 
 | Caminho | O que é |
 |---|---|
 | `backend/analise-routes.js` | Rotas `/analise/*` para o `jur.js` (CommonJS, 1 linha para ligar) |
-| `worker/analise.mjs` | Worker separado (como o `prazo.mjs`): fila de jobs, abertura automática, IMAP, lembretes |
+| `worker/analise.mjs` | Worker separado (como o `prazo.mjs`): fila de jobs, abertura automática, alertas de subsídios sem retorno |
 | `worker/stages/*.mjs` | As 8 etapas + pós-processamento do jus.br |
 | `shared/regras.js` | Motor de regras declarativas (JSON Logic + operadores de data) — sem dependências |
 | `shared/decisao.js` | Triagem, matriz de subsídios, parecer, conexão/litispendência/coisa julgada |
-| `shared/esteira.js` | Flags, configuração, fila de jobs, índices, cifragem de senhas, envio de e-mail |
-| `pacotes/crefisa-2026.2.json` | **Tudo que é da Crefisa**: empresas/CNPJs, 26 teses, 11 preliminares, 33 regras, matriz de subsídios, modelos de e-mail, blocos da peça, prompts |
+| `shared/esteira.js` | Flags, configuração, fila de jobs, índices, cifragem |
+| `pacotes/crefisa-2026.2.json` | **Tudo que é da Crefisa**: empresas/CNPJs, 26 teses, 11 preliminares, 33 regras, matriz de subsídios, modelos do pedido de subsídios, blocos da peça, prompts |
 | `pacotes/crefisa-manual-2026.2.txt` | Texto do manual (vai para os prompts de triagem e parecer) |
 | `jusbr/roteiro-claude-chrome.md` | Texto da tarefa agendada do Claude no Chrome (PC autenticado no jus.br) |
 | `client/src/components/AnaliseTab.jsx` | Aba "Análise da Inicial" no processo |
-| `client/src/pages/analise-config.js` | Tela de configuração por cliente, caixa de e-mail e token do jus.br |
+| `client/src/pages/analise-config.js` | Tela de configuração por cliente e token do jus.br |
 | `scripts/seed-pacote.mjs` | Instala o pacote e liga a análise para escritório/clientes |
 | `shared/conferencia.js` | Conferência de peças .docx antes do protocolo (sobras de modelo, realce, coerência com o processo) |
 | `scripts/conferir.mjs` | Conferência pela linha de comando (arquivo ou pasta; planilha CSV; cópia com comentários) |
@@ -81,8 +81,6 @@ Isso: instala o pacote, liga `escritorios.funcao.analiseInicial`, cria `analiseC
 Escritório sem a flag não vê nada (rotas devolvem 403, o worker ignora, a aba não aparece).
 
 Depois, na tela **Análise da Inicial — configuração**:
-- destinatários (Para/Cc) por tipo: subsídio, acordo, complemento;
-- caixa de e-mail de subsídios (SMTP + IMAP; senhas ficam cifradas);
 - **Gerar token da ponte** do jus.br (aparece uma única vez).
 
 ### 3. Front
