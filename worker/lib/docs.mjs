@@ -30,6 +30,20 @@ export async function enviarS3(bucket, key, buffer, contentType) {
 
 export const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
+// carimbo que o tribunal repete no topo/lateral de cada página (PJe: "Num. … - Pág. N", "Assinado eletronicamente por…";
+// e-SAJ: "Este documento é cópia do original…"). Ocupa o começo da página e esconde o conteúdo da classificação.
+const LINHA_CARIMBO = [
+  /^Num\. ?\d+ - Pág\. ?\d+$/i,
+  /^Assinado eletronicamente por:/i,
+  /^https?:\/\/\S*(ConsultaDocumento|listView|conferirdocumento|abrirConferencia)\S*$/i,
+  /^Número do documento: ?\d+$/i,
+  /^Este documento foi gerado pelo usuário/i,
+  /^Este documento é cópia do original/i,
+  /^Para conferir o original, acesse/i,
+];
+export const semCarimbo = (texto) => String(texto || '').split('\n')
+  .filter((l) => !LINHA_CARIMBO.some((re) => re.test(l.trim()))).join('\n').trim();
+
 const ehPdf = (doc) => /pdf/i.test(doc.mimeType || '') || /\.pdf$/i.test(doc.originalName || '');
 const ehImagem = (doc) => /^image\/(png|jpe?g|tiff)/i.test(doc.mimeType || '') || /\.(png|jpe?g|tiff?)$/i.test(doc.originalName || '');
 export const ehAudio = (doc) => /^audio\//i.test(doc.mimeType || '') || /\.(mp3|wav|ogg|m4a|opus|aac|wma)$/i.test(doc.originalName || '');
@@ -41,10 +55,10 @@ async function ocrBytes(bytes) {
 }
 
 // texto por página de um PDF; páginas sem texto (escaneadas) vão para o Textract
-export async function extrairPaginasPdf(buffer, { maxPaginas = 400, minCharsSemOcr = 40, ocr = true } = {}) {
+async function lerTextoPdf(buf, maxPaginas) {
   const paginas = [];
   let i = 0;
-  await pdfParse(buffer, {
+  await pdfParse(buf, {
     max: maxPaginas,
     pagerender: async (pageData) => {
       const tc = await pageData.getTextContent({ normalizeWhitespace: true, disableCombineTextItems: false });
@@ -58,9 +72,37 @@ export async function extrairPaginasPdf(buffer, { maxPaginas = 400, minCharsSemO
       return '';
     },
   });
+  return paginas;
+}
+
+// PDF com tabela xref corrompida ("bad XRef entry", "Invalid XRef stream"...): o pdf-lib reconstrói a estrutura ao regravar
+async function repararPdf(buffer) {
+  const d = await PDFDocument.load(buffer, { ignoreEncryption: true, throwOnInvalidObject: false, updateMetadata: false });
+  return Buffer.from(await d.save({ useObjectStreams: false }));
+}
+
+export async function extrairPaginasPdf(buffer, { maxPaginas = 400, minCharsSemOcr = 40, ocr = true } = {}) {
+  let paginas;
+  let reparado = false;
+  try {
+    paginas = await lerTextoPdf(buffer, maxPaginas);
+  } catch (e1) {
+    // 1) tenta de novo com o PDF reconstruído; 2) sem texto legível, manda todas as páginas para o OCR
+    try {
+      const fixo = await repararPdf(buffer);
+      buffer = fixo;
+      reparado = true;
+      paginas = await lerTextoPdf(fixo, maxPaginas);
+    } catch (e2) {
+      if (!reparado) throw new Error(`PDF ilegível (${String(e1.message || e1).slice(0, 120)}); reparo falhou: ${String(e2.message || e2).slice(0, 120)}`);
+      const n = (await PDFDocument.load(buffer, { ignoreEncryption: true })).getPageCount();
+      paginas = Array.from({ length: Math.min(n, maxPaginas) }, () => '');
+    }
+  }
 
   const saida = paginas.map((texto, idx) => ({ pagina: idx + 1, texto: texto || '', ocr: false }));
-  const precisam = saida.filter((p) => p.texto.length < minCharsSemOcr);
+  // página escaneada do PJe traz só o carimbo como texto: conta o que sobra sem ele
+  const precisam = saida.filter((p) => semCarimbo(p.texto).length < minCharsSemOcr);
   if (ocr && precisam.length) {
     const src = await PDFDocument.load(buffer, { ignoreEncryption: true });
     for (const p of precisam) {

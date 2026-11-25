@@ -13,6 +13,7 @@ export const D = require('../../shared/decisao.js');
 const { motivoExclusao } = require('../../shared/documentos.js');
 export const R = require('../../shared/regras.js');
 export const CONF = require('../../shared/conferencia.js');
+export const CAPA = require('../../shared/capa-tribunal.js');
 
 const __dir = path.dirname(fileURLToPath(import.meta.url));
 

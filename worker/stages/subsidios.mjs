@@ -22,6 +22,15 @@ async function prazoContestacao(db, processo) {
   return d ? new Date(d) : null;
 }
 
+// inicial sem número de contrato, mas com extrato SCR: o contrato se acha pela data-base e pelo valor lançado (Manual 4.2)
+function contratoPeloScr(f) {
+  const data = v(f?.fatos?.dataScr);
+  const valor = v(f?.fatos?.valorScr);
+  if (!data && valor == null) return null;
+  const partes = [data && `data-base ${data}`, valor != null && `valor ${Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`, v(f?.fatos?.modalidadeScr)].filter(Boolean);
+  return `não informados na inicial — identificar pelo SCR (${partes.join(', ')}) o contrato correspondente entre os do CPF`;
+}
+
 function dadosModelo(ctx, extra = {}) {
   const { processo, analise, escritorio } = ctx;
   const f = analise.ficha || {};
@@ -32,7 +41,7 @@ function dadosModelo(ctx, extra = {}) {
     orgao: v(f?.processo?.juizo) || processo.comarca || '',
     autor: v(f?.autor?.nome) || processo.ativo?.nome || '',
     cpf: U.formatarCpf(v(f?.autor?.cpf) || U.cpfDoTexto(processo.extraFields?.documentoOutraParte) || ''),
-    contratos: (f.contratos || []).map((c) => c.numero).filter(Boolean).join(', ') || 'não informados na inicial',
+    contratos: (f.contratos || []).map((c) => c.numero).filter(Boolean).join(', ') || contratoPeloScr(f) || 'não informados na inicial',
     teses: (dec.teses || []).map((t) => D.nomeTese(ctx.pacote, t.tese)).join('; '),
     escritorio: nomeEscritorio(escritorio),
     ...extra,
@@ -46,6 +55,8 @@ async function criarSolicitacao(ctx, tipo, itens, extra = {}) {
   const prazo = await prazoContestacao(db, processo);
   const dados = dadosModelo(ctx, { itens: itens.map((i) => ({ item: i })), prazo: prazo ? prazo.toLocaleDateString('pt-BR') : 'a confirmar', ...extra });
   const doc = {
+    // codigo tem índice único (esteira.js): sem ele, a 2ª solicitação do sistema bate em "dup key { codigo: null }"
+    codigo: `GJ-SUB-${U.tokenAleatorio(5)}`,
     tipo, codigoEscritorio: processo.codigoEscritorio, idProcesso: processo._id,
     assunto: U.renderTemplate(modelo.assunto, dados), corpo: U.renderTemplate(modelo.corpo, dados),
     itens: itens.map((i) => ({ item: i, recebido: false, docs: [] })), status: 'a_enviar', prazoContestacao: prazo,

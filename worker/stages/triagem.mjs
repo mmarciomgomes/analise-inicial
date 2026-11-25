@@ -20,6 +20,7 @@ export async function leituraLLM(ctx) {
       `TAXONOMIA DE TESES (use apenas estes ids):\n${(tax.teses || []).map((t) => `- ${t.id}: ${t.nome} (manual ${t.manual})`).join('\n')}`,
       `PRODUTOS: ${(tax.produtos || []).join(', ')}`,
       `FICHA DA INICIAL (já extraída):\n${JSON.stringify({ autor: ficha.autor, poloPassivo: ficha.poloPassivo, contratos: ficha.contratos, fatos: ficha.fatos, pedidos: ficha.pedidos, processo: ficha.processo })}`,
+      ...(dil.capa && !dil.capa.erro ? [`CAPA NO TRIBUNAL (cadastro oficial): ${JSON.stringify({ poloAtivo: dil.capa.poloAtivo, poloPassivo: dil.capa.poloPassivo, assunto: dil.capa.assunto, classe: dil.capa.tipoProcedimento, orgaoJulgador: dil.capa.orgaoJulgador, valorCausa: dil.capa.valorCausa, distribuicao: dil.capa.dataDistribuicao })}`] : []),
       `DILIGÊNCIAS: conexão=${(dil.conexao || []).length}, litispendência=${(dil.litispendencia || []).length}, coisa julgada=${(dil.coisaJulgada || []).length}, advogado=${dil.advogado?.faixa || 'n/d'}`,
       `PETIÇÃO INICIAL:\n${texto}`,
       'Enquadre a tese principal pelo fato central (cap. 14 e 15). Se a fraude depende do canal (trilha), use "fraude" genérico.',

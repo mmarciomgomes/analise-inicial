@@ -133,6 +133,8 @@ const OPS = {
     const V = (Array.isArray(valores) ? valores : [valores]).map(norm);
     return L.some((x) => V.includes(x));
   },
+  // a lista tem algum item diferente do valor (ex.: outra empresa do grupo no polo além da responsável)
+  temOutro: (lista, valor) => (Array.isArray(lista) ? lista : [lista]).some((x) => x != null && norm(x) !== norm(valor)),
   anosDesde: (d, ref) => anosEntre(d, ref),
   diasDesde: (d, ref) => diasEntre(d, ref),
   dataAntesDe: (a, b) => { const c = cmpData(a, b); return c === null ? null : c < 0; },

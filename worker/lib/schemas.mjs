@@ -61,7 +61,7 @@ export const schemaFicha = {
     },
     advogados: {
       type: 'array',
-      items: { type: 'object', properties: { nome: { type: 'string' }, oab: { type: ['string', 'null'] }, uf: { type: ['string', 'null'] }, email: { type: ['string', 'null'] }, pagina: { type: ['integer', 'null'] } }, required: ['nome'] },
+      items: { type: 'object', properties: { nome: { type: 'string' }, oab: { type: ['string', 'null'], description: 'Só o número da inscrição principal (a UF dela vai em uf); suplementares de outras UFs ficam de fora' }, uf: { type: ['string', 'null'] }, email: { type: ['string', 'null'] }, pagina: { type: ['integer', 'null'] } }, required: ['nome'] },
     },
     poloPassivo: {
       type: 'array',
@@ -90,6 +90,9 @@ export const schemaFicha = {
         valoresDescontados: { type: 'array', items: { type: 'object', properties: { valor: { type: 'number' }, pagina: { type: ['integer', 'null'] } }, required: ['valor'] } },
         ondeOcorreDesconto: ev({ type: ['string', 'null'], enum: ['beneficio', 'conta', 'folha', 'cartao', 'boleto', 'nao_informado', null] }),
         dataScr: evStr(),
+        // do relatório SCR/Registrato anexado: é o que permite achar o contrato quando a inicial não cita o número
+        valorScr: ev({ type: ['number', 'null'], description: 'Valor lançado no SCR para a instituição ré (vencido/a vencer), em reais' }),
+        modalidadeScr: ev({ type: ['string', 'null'], description: 'Modalidade da operação no SCR (ex.: crédito pessoal sem consignação)' }),
         negativacaoAlegada: ev({ type: ['string', 'null'], enum: ['limpa_nome', 'scr', 'orgaos_protecao', 'nao', null] }),
         alegaQuitacao: evBool(),
         resumo: { type: ['string', 'null'], description: '3 a 5 linhas com o núcleo dos fatos narrados' },

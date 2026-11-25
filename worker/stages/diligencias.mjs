@@ -3,9 +3,30 @@
 import { chamarEstruturado } from '../lib/llm.mjs';
 import { schemaComparacao } from '../lib/schemas.mjs';
 import { comunicacoesPorOab, comunicacoesPorNomeParte } from '../lib/djen.mjs';
-import { E, U, D, R, paginasDoSegmento } from '../lib/contexto.mjs';
+import { E, U, D, R, CAPA, paginasDoSegmento } from '../lib/contexto.mjs';
 
 const v = (x) => (x && typeof x === 'object' && 'valor' in x ? x.valor : x);
+
+/* ---------- capa no tribunal (buscaprocessos): quem o tribunal cadastrou como réu, valor, órgão (Manual 1.7) ---------- */
+const CAPA_VALIDADE_MS = 7 * 864e5;
+export async function capaDoTribunal(ctx) {
+  const { db, processo } = ctx;
+  // a conferência de capa do processo (jur.js) já pode ter consultado: reaproveita se recente
+  const conf = await db.collection('conferencias_processo').findOne(
+    { codigoEscritorio: processo.codigoEscritorio, processoId: processo._id },
+    { projection: { externo: 1, ultimaConsultaEm: 1 } },
+  ).catch(() => null);
+  if (conf?.externo && conf.ultimaConsultaEm && Date.now() - +new Date(conf.ultimaConsultaEm) < CAPA_VALIDADE_MS) {
+    return { ...conf.externo, fonte: 'conferencia', consultadoEm: conf.ultimaConsultaEm };
+  }
+  const numero = U.soDigitos(processo.numeroProcessoFull || processo.numeroProcesso);
+  if (numero.length !== 20) return { erro: 'Número fora do padrão CNJ: capa não consultada.' };
+  try {
+    return { ...(await CAPA.consultarCapa(numero)), fonte: 'buscaprocessos', consultadoEm: new Date() };
+  } catch (e) {
+    return { erro: String(e.message || e).slice(0, 300) };
+  }
+}
 
 /* ---------- 4.3 / 4.4: base interna = coleção processos (higienização) ---------- */
 export async function baseInterna(ctx, cpf) {
@@ -129,7 +150,7 @@ export async function outrasAcoesNoDjen(ctx, nome) {
 /* ---------- 4.5: perfil do advogado ---------- */
 export async function atualizarPerfilAdvogado(ctx, { oab, uf, nome }) {
   const { db, processo, config, pacote } = ctx;
-  const chave = { codigoEscritorio: processo.codigoEscritorio, oab: U.soDigitos(oab), uf: String(uf || '').toUpperCase() };
+  const chave = { codigoEscritorio: processo.codigoEscritorio, oab: U.oabNumero(oab), uf: String(uf || '').toUpperCase() };
   const atual = await db.collection('perfilAdvogado').findOne(chave);
 
   // DJEN (reaproveita 30 dias)
@@ -180,7 +201,13 @@ export async function atualizarPerfilAdvogado(ctx, { oab, uf, nome }) {
   };
   const score = U.calcularScore(indicadores, config.score || pacote.score || null);
   const manual = atual?.marcaManual ?? null; // { captador: true/false, por, motivo }
-  const perfil = { ...chave, nome: nome || atual?.nome || null, indicadores, score, faixa: manual ? (manual.captador ? 'ofensor' : 'normal') : score.faixa, marcaManual: manual, atualizadoEm: new Date() };
+  // lista de captadores do escritório (Audiência > Parâmetros > Captadores) = a "tarja" do Manual 1.1
+  const naLista = !!(await db.collection('captadores').findOne({
+    codigoEscritorio: processo.codigoEscritorio, oabNumero: chave.oab, ativo: { $ne: false },
+    $or: [{ oabUf: chave.uf }, { oabUf: null }, { oabUf: '' }],
+  }));
+  const faixa = manual ? (manual.captador ? 'ofensor' : 'normal') : naLista ? 'ofensor' : score.faixa;
+  const perfil = { ...chave, nome: nome || atual?.nome || null, indicadores, score, faixa, marcaManual: manual, listaCaptadores: naLista, atualizadoEm: new Date() };
   await db.collection('perfilAdvogado').updateOne(chave, { $set: perfil }, { upsert: true });
   return perfil;
 }
@@ -231,6 +258,17 @@ export async function executar(ctx) {
   const interna = ctx.modulo('diligencias.baseInterna') ? await baseInterna(ctx, cpf) : { processos: [], alertas: [] };
   alertas.push(...interna.alertas);
 
+  const capa = await capaDoTribunal(ctx);
+  if (capa.erro) alertas.push({ nivel: 'info', regra: 'capa', texto: `Capa do tribunal não consultada (${capa.erro}).` });
+  else {
+    const naInicial = D.empresasNoPolo(D.fichaPlana(ficha), ctx.pacote);
+    const noTribunal = D.empresasNoTexto(capa.poloPassivo, ctx.pacote);
+    const nomes = (ids) => ids.map((id) => (ctx.pacote.empresas || []).find((e) => e.id === id)?.nome || id).join(' e ') || 'nenhuma empresa do grupo';
+    if (noTribunal.length && naInicial.length && noTribunal.slice().sort().join() !== naInicial.slice().sort().join()) {
+      alertas.push({ nivel: 'atencao', regra: 'capa', texto: `Polo passivo: a inicial indica ${nomes(naInicial)}, mas o tribunal cadastrou ${nomes(noTribunal)} (capa: "${capa.poloPassivo}").` });
+    }
+  }
+
   const comprovante = ctx.modulo('diligencias.comprovante') ? await verificarComprovante(ctx) : null;
   if (comprovante) alertas.push(...comprovante.alertas);
 
@@ -270,8 +308,8 @@ export async function executar(ctx) {
     outrasAcoes: outras,
     conexao: relacoes.conexao, litispendencia: relacoes.litispendencia, coisaJulgada: relacoes.coisaJulgada,
     comparacoes: relacoes.analisadas, contraOutrosBancos: relacoes.contraOutrosBancos,
-    advogados, advogado: pior ? { oab: `${pior.oab}/${pior.uf}`, faixa: pior.faixa, score: pior.score?.total, captadorManual: processo.captador === true && processo.captadorOrigem !== 'analise' } : { captadorManual: processo.captador === true },
-    comprovante, djen: djenParte,
+    advogados, advogado: pior ? { oab: `${pior.oab}/${pior.uf}`, nome: pior.nome || null, faixa: pior.faixa, score: pior.score?.total, listaCaptadores: !!pior.listaCaptadores, captadorManual: processo.captador === true && processo.captadorOrigem !== 'analise' } : { captadorManual: processo.captador === true },
+    comprovante, djen: djenParte, capa,
     alertas, em: new Date(),
   };
   await ctx.salvar({ diligencias });

@@ -324,6 +324,11 @@
             }
           },
           {
+            "existe": {
+              "var": "poloEmpresas"
+            }
+          },
+          {
             "!": {
               "in": [
                 {
@@ -342,6 +347,49 @@
           "acao": "addPreliminar",
           "preliminar": "retificacao_polo_passivo",
           "motivo": "A empresa indicada na inicial não é a responsável pelo produto discutido (Manual 1.7)."
+        }
+      ]
+    },
+    {
+      "id": "exclusao-polo",
+      "fase": "ambas",
+      "ordem": 12.5,
+      "fonte": "Manual 1.7",
+      "descricao": "A inicial incluiu, além da responsável pelo produto, outra empresa do grupo",
+      "quando": {
+        "and": [
+          {
+            "existe": {
+              "var": "decisao.poloPassivo"
+            }
+          },
+          {
+            "in": [
+              {
+                "var": "decisao.poloPassivo.empresaId"
+              },
+              {
+                "var": "poloEmpresas"
+              }
+            ]
+          },
+          {
+            "temOutro": [
+              {
+                "var": "poloEmpresas"
+              },
+              {
+                "var": "decisao.poloPassivo.empresaId"
+              }
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "retificacao_polo_passivo",
+          "motivo": "Além da empresa responsável pelo produto, a inicial incluiu outra empresa do grupo no polo passivo: pedir a exclusão da parte indevidamente demandada (Manual 1.7)."
         }
       ]
     },
@@ -459,6 +507,45 @@
           "acao": "addPreliminar",
           "preliminar": "advogado_captador",
           "motivo": "Patrono classificado como contumaz/captador (Manual 1.1)."
+        }
+      ]
+    },
+    {
+      "id": "captador-indicios",
+      "fase": "triagem",
+      "ordem": 20.5,
+      "fonte": "Manual 1.1",
+      "descricao": "Patrono com indícios de advocacia em massa (score na faixa de atenção)",
+      "quando": {
+        "and": [
+          {
+            "==": [
+              {
+                "var": "diligencias.advogado.faixa"
+              },
+              "atencao"
+            ]
+          },
+          {
+            "!=": [
+              {
+                "var": "diligencias.advogado.captadorManual"
+              },
+              true
+            ]
+          }
+        ]
+      },
+      "entao": [
+        {
+          "acao": "addPreliminar",
+          "preliminar": "advogado_captador",
+          "motivo": "A CONFIRMAR: patrono com indícios de advocacia em massa (volume de ações, concentração contra bancos, atuação fora da UF). Se confirmado, cadastre-o em Captadores (Manual 1.1)."
+        },
+        {
+          "acao": "alerta",
+          "nivel": "atencao",
+          "texto": "Advogado com indícios de captação: confirmar antes de manter a preliminar de advogado captador e, se for o caso, incluí-lo na lista de Captadores."
         }
       ]
     },
@@ -1673,8 +1760,8 @@
   },
   "prompts": {
     "classificacao": "Você classifica páginas de autos de processos cíveis contra instituições financeiras. Para cada documento, identifique os trechos (faixas de páginas) e o tipo de cada um.",
-    "extracao": "Você é analista jurídico do escritório e preenche a Ficha da Inicial em processos do grupo Crefisa. Leia a petição inicial e os anexos. Extraia SOMENTE o que estiver escrito, com a página e um trecho literal curto como evidência. Campo não encontrado = null. Não deduza CPF, contrato ou valores que não estejam no texto.",
-    "triagem": "Você aplica o MANUAL INTERNO DE ANÁLISE abaixo para enquadrar o núcleo da controvérsia. Escolha teses apenas da taxonomia fornecida. Responda às perguntas-chave do capítulo 15 citando o trecho da inicial. Não decida prescrição, polo passivo nem acordo: isso é feito por regras depois.",
+    "extracao": "Você é analista jurídico do escritório e preenche a Ficha da Inicial em processos do grupo Crefisa. Leia a petição inicial e os anexos. Extraia SOMENTE o que estiver escrito, com a página e um trecho literal curto como evidência. Campo não encontrado = null. Não deduza CPF, contrato ou valores que não estejam no texto. Havendo relatório SCR/Registrato anexado, preencha dataScr (data-base, mm/aaaa), valorScr (valor lançado pela instituição ré) e modalidadeScr: é por eles que se identifica o contrato quando a inicial não cita o número.",
+    "triagem": "Você aplica o MANUAL INTERNO DE ANÁLISE abaixo para enquadrar o núcleo da controvérsia. Escolha teses apenas da taxonomia fornecida. Responda às perguntas-chave do capítulo 15 citando o trecho da inicial. Não decida prescrição, polo passivo nem acordo: isso é feito por regras depois. Atenção: não reconhecer UM DESCONTO não é não reconhecer O CONTRATO. Se a parte admite o empréstimo (ou junta o contrato/demonstrativo dele) e impugna só valores avulsos — juros, multa ou encargos de atraso, comumente R$ 33,39 ou R$ 31,29 —, a tese é desconto indevido padrão (5.1), não fraude. Fraude exige negativa da contratação em si. Se o texto recebido não traz a narrativa dos fatos e os pedidos (só capa, tabela ou anexo), diga isso em observacoes, marque precisaHumano e use confiança baixa.",
     "comparacao": "Compare a ação atual com outra ação da mesma parte e diga se há identidade de pedido e de causa de pedir, segundo os conceitos de conexão, litispendência e coisa julgada do manual.",
     "subsidio": "Você lê subsídios enviados pela Crefisa (telas do SAG, contratos, trilhas, extratos, demonstrativos, transcrições de gravações) e extrai os dados pedidos, com página e trecho como evidência.",
     "parecer": "Você redige o parecer de defesa a partir da ficha, das diligências, dos subsídios e da decisão de regras já tomada. As decisões de regras (prescrição, polo passivo, documentos bloqueados, acordo) são definitivas: explique-as, não as altere. Aponte riscos e pendências.",

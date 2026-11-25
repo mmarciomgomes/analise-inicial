@@ -48,6 +48,24 @@ function empresasNoPolo(fichaP, pacote) {
   return Array.from(ids);
 }
 
+// empresas do grupo citadas num texto livre (polo passivo da capa do tribunal, que junta todos os réus numa linha).
+// O apelido mais longo casa primeiro e "some" do texto: "BANCO CREFISA S.A" não conta também como "crefisa s.a".
+function empresasNoTexto(texto, pacote) {
+  let resto = ` ${norm(texto).replace(/[^a-z0-9/.,]+/g, ' ')} `;
+  const apelidos = (pacote?.empresas || []).flatMap((e) => (e.apelidos || []).map((a) => ({ id: e.id, a: norm(a) })))
+    .sort((x, y) => y.a.length - x.a.length);
+  const ids = new Set();
+  for (const { id, a } of apelidos) {
+    if (!a) continue;
+    // palavra inteira: "crefisa sa" não casa "crefisa sao paulo"
+    const re = new RegExp(`(?<![a-z0-9])${a.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}(?![a-z0-9])`, 'g');
+    if (!re.test(resto)) continue;
+    ids.add(id);
+    resto = resto.replace(re, ' # ');
+  }
+  return Array.from(ids);
+}
+
 function derivarProduto(fichaP, triagemLLM) {
   const doLLM = triagemLLM?.produto;
   if (doLLM && doLLM !== 'nao_identificado') return doLLM;
@@ -93,7 +111,9 @@ function montarFatos({ pacote, ficha, triagemLLM, diligencias, sag, contrato, de
     triagemLLM: triagemLLM || {},
     diligencias: diligencias || {},
     produto: derivarProduto(fichaP, triagemLLM),
-    poloEmpresas: empresasNoPolo(fichaP, pacote),
+    // réus do grupo = os da inicial + os que o tribunal cadastrou (Manual 1.7: "cadastramento no portal do tribunal")
+    poloEmpresas: Array.from(new Set([...empresasNoPolo(fichaP, pacote), ...empresasNoTexto(diligencias?.capa?.poloPassivo, pacote)])),
+    poloEmpresasTribunal: empresasNoTexto(diligencias?.capa?.poloPassivo, pacote),
     sag: sag || {},
     contrato: contrato || {},
     decisaoJudicial: decisaoJudicial || {},
@@ -156,6 +176,23 @@ function escolherContrato(fichaP, sag) {
   const citados = (fichaP?.contratos || []).map((c) => soDigitos(c?.numero)).filter(Boolean);
   const porNumero = contratos.find((c) => citados.includes(soDigitos(c?.numero)));
   if (porNumero) return { ...porNumero, criterio: 'numero citado na inicial' };
+  // SCR (Manual 4.2): o contrato que existia e não estava liquidado na data-base; desempata pelo valor mais próximo do lançado
+  // data-base do SCR costuma vir como mês/ano ("08/2026"): vale o último dia do mês
+  const mesAno = String(fichaP?.fatos?.dataScr || '').trim().match(/^(\d{1,2})\/(\d{4})$/);
+  const dataScr = mesAno ? new Date(Date.UTC(+mesAno[2], +mesAno[1], 0)) : toDate(fichaP?.fatos?.dataScr);
+  if (dataScr) {
+    const ativoNaData = contratos.filter((c) => {
+      const ini = toDate(c?.dataCelebracao);
+      const fim = toDate(c?.ultimoPagamento);
+      return ini && ini <= dataScr && (c?.status === 'aberto' || !fim || fim >= dataScr);
+    });
+    const valorScr = Number(fichaP?.fatos?.valorScr);
+    const dist = (c) => (Number.isFinite(valorScr) ? Math.min(...[c.valor, c.valorParcela].filter((x) => x != null).map((x) => Math.abs(x - valorScr)), Infinity) : 0);
+    if (ativoNaData.length) {
+      const [melhor] = ativoNaData.slice().sort((a, b) => dist(a) - dist(b));
+      return { ...melhor, criterio: `ativo na data-base do SCR${ativoNaData.length > 1 ? ` (${ativoNaData.length} candidatos; conferir)` : ''}` };
+    }
+  }
   const abertos = contratos.filter((c) => c?.status === 'aberto');
   const ordenar = (arr) => arr.slice().sort((a, b) => (+(toDate(b.dataCelebracao) || 0)) - (+(toDate(a.dataCelebracao) || 0)));
   if (abertos.length) return { ...ordenar(abertos)[0], criterio: 'contrato em aberto mais recente (inicial não cita número)' };
@@ -222,7 +259,7 @@ function enquadrarRelacao(acao, comp) {
 }
 
 module.exports = {
-  fichaPlana, empresasNoPolo, derivarProduto, subsidiosDaMatriz, montarFatos,
+  fichaPlana, empresasNoPolo, empresasNoTexto, derivarProduto, subsidiosDaMatriz, montarFatos,
   decidirTriagem, decidirParecer, precisaRevisao, escolherContrato,
   preClassificarAcoes, enquadrarRelacao, nomeTese, nomePreliminar, hojeISO, v,
 };

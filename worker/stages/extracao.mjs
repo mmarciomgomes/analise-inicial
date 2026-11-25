@@ -32,6 +32,7 @@ export async function executar(ctx) {
   const cpfFicha = U.soDigitos(ficha?.autor?.cpf?.valor);
   const cpfCadastro = U.cpfDoTexto(processo.extraFields?.documentoOutraParte);
   const alertas = [];
+  if (inicial.every((s) => /^assumido/.test(s.descricao || ''))) alertas.push({ nivel: 'vermelho', texto: 'A petição inicial não foi identificada entre os documentos: a leitura usou o maior documento. Confira se a inicial está anexada e reprocesse.' });
   if (cpfFicha && !U.cpfValido(cpfFicha)) alertas.push({ nivel: 'vermelho', texto: `CPF da inicial (${U.formatarCpf(cpfFicha)}) tem dígito verificador inválido.` });
   if (cpfFicha && cpfCadastro && cpfFicha !== cpfCadastro) alertas.push({ nivel: 'vermelho', texto: `CPF da inicial (${U.formatarCpf(cpfFicha)}) difere do cadastro do processo (${U.formatarCpf(cpfCadastro)}).` });
   const cpf = cpfFicha || cpfCadastro || null;
@@ -40,7 +41,7 @@ export async function executar(ctx) {
   await ctx.salvar({
     ficha,
     cpfHash: cpf ? U.hashCurto(cpf) : null,
-    oabsAdversas: (ficha.advogados || []).filter((a) => a.oab).map((a) => `${U.soDigitos(a.oab)}/${String(a.uf || '').toUpperCase()}`),
+    oabsAdversas: (ficha.advogados || []).filter((a) => a.oab).map((a) => `${U.oabNumero(a.oab)}/${String(a.uf || '').toUpperCase()}`),
     assinaturaInicial: U.assinaturaTexto(textoInicial),
     extracao: { modelo, em: new Date(), alertas, versaoManual: ctx.pacote.versao },
   });

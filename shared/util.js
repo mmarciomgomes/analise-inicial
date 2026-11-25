@@ -6,6 +6,8 @@ const { norm } = require('./regras');
 
 /* ---------- CPF / CNPJ / processo ---------- */
 const soDigitos = (s) => String(s ?? '').replace(/\D+/g, '');
+// número da inscrição principal: "19.588 (principal); A2457 (AM); 41658-A (PA)" -> "19588" (soDigitos juntaria todas)
+const oabNumero = (s) => soDigitos((String(s ?? '').match(/\d[\d.]*/) || [''])[0]);
 
 function cpfValido(cpfRaw) {
   const c = soDigitos(cpfRaw);
@@ -197,7 +199,7 @@ function calcularScore(ind, cfg) {
 }
 
 module.exports = {
-  soDigitos, cpfDoTexto, cpfValido, formatarCpf, variantesCpf, numeroCnjValido, formatarCnj,
+  soDigitos, oabNumero, cpfDoTexto, cpfValido, formatarCpf, variantesCpf, numeroCnjValido, formatarCnj,
   hashCurto, sha256, tokenAleatorio, similaridade, normalizarParaHash, renderTemplate,
   ehInstituicaoFinanceira, separarPartes, calcularScore, SCORE_DEFAULT, norm,
   assinaturaTexto, similaridadeAssinaturas,
