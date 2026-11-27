@@ -70,6 +70,11 @@ async function rascunho(ctx) {
   const { analise } = ctx;
   const dec = analise.triagem?.aprovada;
   if (!dec) throw new Error('Triagem não aprovada.');
+  // nova aprovação (reprocessamento): o pedido ainda não enviado é refeito, sem duplicar
+  await ctx.db.collection('subsidiosSolicitacoes').updateMany(
+    { idProcesso: ctx.processo._id, tipo: { $in: ['subsidio', 'acordo'] }, status: { $in: ['rascunho', 'a_enviar'] } },
+    { $set: { status: 'substituido', substituidoEm: new Date() } },
+  );
   const criadas = [];
   const itens = (dec.subsidiosSolicitar || []).map((x) => x.item || x);
   if (itens.length) criadas.push(await criarSolicitacao(ctx, 'subsidio', itens));

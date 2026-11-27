@@ -13,11 +13,13 @@ const hojeISO = (d = new Date()) => {
 // valor de um campo da ficha (cada campo vem como {valor, pagina, trecho} ou valor puro)
 const v = (campo) => (campo && typeof campo === 'object' && 'valor' in campo ? campo.valor : campo);
 
-// "achata" a ficha {valor,pagina,trecho} -> valores, para as regras lerem direto
+// "achata" a ficha {valor,pagina,trecho} -> valores, para as regras lerem direto.
+// Só é evidência o objeto que não tem outras chaves: um contrato também tem "valor" (o do empréstimo) e "pagina".
+const CHAVES_EVIDENCIA = new Set(['valor', 'pagina', 'doc', 'trecho']);
 function fichaPlana(ficha) {
   if (ficha === null || typeof ficha !== 'object') return ficha;
   if (Array.isArray(ficha)) return ficha.map(fichaPlana);
-  if ('valor' in ficha && ('pagina' in ficha || 'trecho' in ficha)) return fichaPlana(ficha.valor);
+  if ('valor' in ficha && Object.keys(ficha).every((k) => CHAVES_EVIDENCIA.has(k))) return fichaPlana(ficha.valor);
   const out = {};
   for (const [k, val] of Object.entries(ficha)) out[k] = fichaPlana(val);
   return out;
