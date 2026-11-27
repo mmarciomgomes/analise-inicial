@@ -170,6 +170,16 @@ function registerAnaliseRoutes(app, { getDb, baixarArquivo } = {}) {
     if (idsSelecionados) {
       await db.collection('analiseInicial').updateOne({ idProcesso: proc._id }, { $set: { documentosSelecionados: idsSelecionados, documentosSelecionadosEm: new Date(), documentosSelecionadosPor: oid(req.body.userId) } });
     }
+    // recomeço: a triagem volta para revisão (a aprovação antiga fica guardada); sem isso a nova leitura só gerava um aviso
+    if (etapa === 'ingestao') {
+      const atual = await db.collection('analiseInicial').findOne({ idProcesso: proc._id }, { projection: { 'triagem.aprovada': 1, 'triagem.aprovadaPor': 1, 'triagem.aprovadaEm': 1 } });
+      if (atual?.triagem?.aprovada) {
+        await db.collection('analiseInicial').updateOne({ idProcesso: proc._id }, {
+          $set: { 'triagem.aprovacaoAnterior': { decisao: atual.triagem.aprovada, por: atual.triagem.aprovadaPor || null, em: atual.triagem.aprovadaEm || null } },
+          $unset: { 'triagem.aprovada': '', 'triagem.aprovadaPor': '', 'triagem.aprovadaEm': '', 'triagem.aprovacaoAutomatica': '', 'triagem.ajustada': '' },
+        });
+      }
+    }
     const r1 = await E.enfileirar(db, { codigoEscritorio: ce, idProcesso: proc._id, etapa, criadoPor: req.body.userId, prioridade: 3, payload: { manual: true } });
     await E.setEstado(db, proc._id, E.ESTADOS.NA_FILA, { iniciadoPor: oid(req.body.userId) });
     res.json({ ok: true, ...r1 });

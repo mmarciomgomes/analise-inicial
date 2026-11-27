@@ -168,3 +168,14 @@ test('regras do pacote não usam operadores inexistentes', () => {
     assert.deepEqual(dec.erros, [], JSON.stringify(dec.erros));
   }
 });
+
+test('fichaPlana: contrato com "valor" e "pagina" não é confundido com evidência', () => {
+  const ficha = {
+    autor: { nome: { valor: 'FULANO', pagina: 2, trecho: 'FULANO' } },
+    contratos: [{ numero: null, produto: 'pessoal', valor: null, pagina: 30, doc: 'x', trecho: 'EMPRÉSTIMO PESSOAL' }],
+  };
+  const p = D.fichaPlana(ficha);
+  assert.equal(p.autor.nome, 'FULANO');
+  assert.equal(p.contratos[0].produto, 'pessoal');
+  assert.equal(D.derivarProduto(p, { produto: 'nao_identificado' }), 'pessoal');
+});
